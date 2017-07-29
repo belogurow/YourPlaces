@@ -37,4 +37,15 @@ dependencies {
 
     // Retrofit
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
+
+    // Navigation Drawer
+    compile('com.mikepenz:materialdrawer:5.9.4@aar') {
+        transitive = true
+    }
+
+    // Icons and fonts
+    compile "com.mikepenz:iconics-core:2.9.0@aar"
+    compile 'com.mikepenz:google-material-typeface:3.0.1.1.original@aar'
+    compile 'com.mikepenz:material-design-iconic-typeface:2.2.0.3@aar'
+    compile 'com.mikepenz:fontawesome-typeface:4.7.0.1@aar'
 }

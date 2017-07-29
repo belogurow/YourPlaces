@@ -8,8 +8,9 @@
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+        android:theme="@style/AppBarCustomTheme">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/mainToolbar"
@@ -41,8 +42,9 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context="ru.belogurowdev.yourplaces.MainActivity">
+            tools:context="ru.belogurowdev.yourplaces.Activity.MainActivity">
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>
+
 </android.support.design.widget.CoordinatorLayout>

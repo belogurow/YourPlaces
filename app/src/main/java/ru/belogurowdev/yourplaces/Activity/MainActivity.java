@@ -1,4 +1,4 @@
-package ru.belogurowdev.yourplaces;
+package ru.belogurowdev.yourplaces.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ru.belogurowdev.yourplaces.NavigationDrawer.NavDrawer;
+import ru.belogurowdev.yourplaces.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         setSupportActionBar(mToolbar);
+        NavDrawer navDrawer = new NavDrawer(this, mToolbar, 0);
+        navDrawer.setNavigationDrawer();
 
 
 

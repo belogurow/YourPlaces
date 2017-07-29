@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">YourPlaces</string>
+
+    <!-- NavDrawer -->
+    <string name="navSearch">Search</string>
+    <string name="navHistory">History</string>
+    <string name="navFavourites">Favourites</string>
+    <string name="navOpenSource">Open Source</string>
+    <string name="navContact">Contact me</string>
+
 </resources>
