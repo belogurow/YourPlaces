@@ -40,28 +40,28 @@ public class NavDrawer {
 
         PrimaryDrawerItem search = new PrimaryDrawerItem()
                 .withIdentifier(0)
-                .withName(R.string.navSearch)
+                .withName(R.string.nav_search)
                 .withIcon(GoogleMaterial.Icon.gmd_search);
 
         PrimaryDrawerItem history = new PrimaryDrawerItem()
                 .withIdentifier(1)
-                .withName(R.string.navHistory)
+                .withName(R.string.nav_history)
                 .withIcon(GoogleMaterial.Icon.gmd_history);
 
         PrimaryDrawerItem favourites = new PrimaryDrawerItem()
                 .withIdentifier(2)
-                .withName(R.string.navFavourites)
+                .withName(R.string.nav_favourites)
                 .withIcon(GoogleMaterial.Icon.gmd_favorite);
 
 
         SecondaryDrawerItem openSource = new SecondaryDrawerItem()
                 .withIdentifier(3)
-                .withName(R.string.navOpenSource)
+                .withName(R.string.nav_openSource)
                 .withIcon(FontAwesome.Icon.faw_github);
 
         SecondaryDrawerItem contact = new SecondaryDrawerItem()
                 .withIdentifier(4)
-                .withName(R.string.navContact)
+                .withName(R.string.nav_contact)
                 .withIcon(MaterialDesignIconic.Icon.gmi_mail_send);
 
         final Drawer drawerResult = new DrawerBuilder()
