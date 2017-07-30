@@ -50,16 +50,7 @@ public class MainActivity extends AppCompatActivity {
         setToolbar();
         setPlaceSearchFrag();
         setNavDrawer();
-
-
-        mTextViewMap.setText(R.string.pick_on_the_map);
-        mTextViewMap.setTextColor(Color.WHITE);
-
-        Drawable iconPin = new IconicsDrawable(this)
-                .icon(MaterialDesignIconic.Icon.gmi_pin)
-                .color(Color.WHITE)
-                .sizeDp(24);
-        mImageViewPin.setImageDrawable(iconPin);
+        setPlacePicker();
 
 
     }
@@ -73,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
     }
 
+    /**
+     * PlaceAutoComplete configuration
+     */
     private void setPlaceSearchFrag() {
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
@@ -96,6 +90,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Place picker configuration, image with text and icon
+     */
+    private void setPlacePicker() {
+        mTextViewMap.setText(R.string.pick_on_the_map);
+        mTextViewMap.setTextColor(Color.WHITE);
+
+        Drawable iconPin = new IconicsDrawable(this)
+                .icon(MaterialDesignIconic.Icon.gmi_pin)
+                .color(Color.WHITE)
+                .sizeDp(24);
+        mImageViewPin.setImageDrawable(iconPin);
+    }
+
     @OnClick(R.id.imageView_main_map)
     public void openMap() {
 
@@ -114,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
+                // TODO new intent
                 Place place = PlacePicker.getPlace(this, data);
                 String toastMsg = String.format("Place: %s", place.getName());
                 Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
