@@ -11,5 +11,6 @@
 
     <!-- MainActivity -->
     <string name="pick_on_the_map">Pick on the Map</string>
+    <string name="more">MORE</string>
 
 </resources>

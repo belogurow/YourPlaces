@@ -1,14 +1,10 @@
 package ru.belogurowdev.yourplaces.Activity;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.Icon;
-import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -21,18 +17,12 @@ import android.widget.Toast;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.places.GeoDataApi;
 import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.PlaceDetectionApi;
-import com.google.android.gms.location.places.Places;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.imageView_main_map) ImageView mImageViewMap;
 
     @BindView(R.id.include1) View include1;
-    @BindView(R.id.include2) View include2;
+    //@BindView(R.id.include2) View include2;
 
 
 
@@ -74,20 +64,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setRecommendationList() {
-        // first
-        RecyclerView mRecyclerView = include1.findViewById(R.id.recycler_view_recommendations);
-        List<Recommendation> recommendationList = new ArrayList<>();
-        for (int i = 0; i != 5; i++){
-            recommendationList.add(new Recommendation());
-        }
-        RecommendAdapter adapter = new RecommendAdapter(this, recommendationList);
+        // first recommendation
+        Recommendation countryRecommendation = new Recommendation("Countries for tourism");
+
+        RecyclerView mRecyclerView = include1.findViewById(R.id.rv_recommendations);
+        TextView mTextViewTittle = include1.findViewById(R.id.textView_rv_recomend_tittle);
+        mTextViewTittle.setText(countryRecommendation.getRecommendationTitle());
+
+        countryRecommendation.addCard("Usa", null);
+        countryRecommendation.addCard("Italy", null);
+        countryRecommendation.addCard("France", null);
+        countryRecommendation.addCard("Russia", null);
+
+
+
+        RecommendAdapter adapter = new RecommendAdapter(this, countryRecommendation);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(adapter);
-        mRecyclerView.setBackgroundColor(Color.BLUE);
+        //mRecyclerView.setBackgroundColor(Color.BLUE);
 
         // second
-        RecyclerView mRecyclerView2 = include2.findViewById(R.id.recycler_view_recommendations);
+        /*
+        RecyclerView mRecyclerView2 = include2.findViewById(R.id.rv_recommendations);
         List<Recommendation> recommendationList2 = new ArrayList<>();
         for (int i = 0; i != 3; i++){
             recommendationList2.add(new Recommendation());
@@ -96,7 +95,8 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView2.setLayoutManager(layoutManager2);
         mRecyclerView2.setAdapter(adapter2);
-        mRecyclerView2.setBackgroundColor(Color.BLACK);
+        //mRecyclerView2.setBackgroundColor(Color.BLACK);
+        */
 
     }
 
