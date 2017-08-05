@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.imageView_main_map) ImageView mImageViewMap;
 
     @BindView(R.id.include1) View include1;
-    //@BindView(R.id.include2) View include2;
+    @BindView(R.id.include2) View include2;
 
 
 
@@ -63,41 +63,41 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Create new recommendation list with horizontal sub-list category
+     */
     private void setRecommendationList() {
         // first recommendation
         Recommendation countryRecommendation = new Recommendation("Countries for tourism");
-
-        RecyclerView mRecyclerView = include1.findViewById(R.id.rv_recommendations);
-        TextView mTextViewTittle = include1.findViewById(R.id.textView_rv_recomend_tittle);
-        mTextViewTittle.setText(countryRecommendation.getRecommendationTitle());
-
         countryRecommendation.addCard("Usa", null);
         countryRecommendation.addCard("Italy", null);
         countryRecommendation.addCard("France", null);
         countryRecommendation.addCard("Russia", null);
 
+        setNewRecommendation(countryRecommendation, include1);
 
+        // second recommendation TODO test
+        Recommendation placesRecommendation = new Recommendation("Places for everyone");
+        placesRecommendation.addCard("Bar", null);
+        placesRecommendation.addCard("Cafe", null);
 
-        RecommendAdapter adapter = new RecommendAdapter(this, countryRecommendation);
+        setNewRecommendation(placesRecommendation, include2);
+    }
+
+    /**
+     * Initialization a tittle of recommendation and recycler view
+     * @param newRecommendation recommendation
+     * @param parentView view that included in activity_main
+     */
+    private void setNewRecommendation(final Recommendation newRecommendation, final View parentView) {
+        RecyclerView mRecyclerView = parentView.findViewById(R.id.rv_recommendations);
+        TextView mTextViewTittle = parentView.findViewById(R.id.textView_rv_recomend_tittle);
+        mTextViewTittle.setText(newRecommendation.getRecommendationTitle());
+
+        RecommendAdapter adapter = new RecommendAdapter(this, newRecommendation);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(adapter);
-        //mRecyclerView.setBackgroundColor(Color.BLUE);
-
-        // second
-        /*
-        RecyclerView mRecyclerView2 = include2.findViewById(R.id.rv_recommendations);
-        List<Recommendation> recommendationList2 = new ArrayList<>();
-        for (int i = 0; i != 3; i++){
-            recommendationList2.add(new Recommendation());
-        }
-        RecommendAdapter adapter2 = new RecommendAdapter(this, recommendationList2);
-        LinearLayoutManager layoutManager2 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        mRecyclerView2.setLayoutManager(layoutManager2);
-        mRecyclerView2.setAdapter(adapter2);
-        //mRecyclerView2.setBackgroundColor(Color.BLACK);
-        */
-
     }
 
     private void setNavDrawer() {
