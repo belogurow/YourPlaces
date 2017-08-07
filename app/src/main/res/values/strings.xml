@@ -13,4 +13,7 @@
     <string name="pick_on_the_map">Pick on the Map</string>
     <string name="more">MORE</string>
 
+    <!-- CategoryActivity -->
+    <string name="choose_type">Choose type</string>
+
 </resources>

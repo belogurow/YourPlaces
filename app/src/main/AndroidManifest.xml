@@ -7,7 +7,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:background="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -21,14 +21,24 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Activity.PlaceInfoActivity"
             android:parentActivityName=".Activity.MainActivity">
-        <!-- The meta-data element is needed for versions lower than 4.1 -->
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".Activity.MainActivity" />
+
+            <!-- The meta-data element is needed for versions lower than 4.1 -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activity.MainActivity"/>
+        </activity>
+
+        <activity
+            android:name=".Activity.PlaceTypesActivity"
+            android:label="@string/choose_type"
+            android:parentActivityName=".Activity.MainActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activity.MainActivity"/>
         </activity>
 
         <meta-data

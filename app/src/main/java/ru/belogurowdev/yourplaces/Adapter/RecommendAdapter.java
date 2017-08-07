@@ -1,17 +1,16 @@
 package ru.belogurowdev.yourplaces.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ru.belogurowdev.yourplaces.Activity.PlaceTypesActivity;
 import ru.belogurowdev.yourplaces.Model.Recommendation;
 import ru.belogurowdev.yourplaces.R;
 
@@ -25,7 +24,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.View
     private Recommendation mRecommendation;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.textView_card_tittle) TextView mTextViewCardTitle;
+        @BindView(R.id.textView_card_recommendation) TextView mTextViewCardTitle;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -41,7 +40,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.View
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_in_recommendations, parent, false);
+                .inflate(R.layout.card_recommendation, parent, false);
         return new ViewHolder(itemView);
     }
 
@@ -49,6 +48,14 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.View
     public void onBindViewHolder(ViewHolder holder, int position) {
         final String cardTitle = mRecommendation.getCardTitle(position);
         holder.mTextViewCardTitle.setText(cardTitle);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent categoryIntent = new Intent(mContext, PlaceTypesActivity.class);
+                mContext.startActivity(categoryIntent);
+            }
+        });
     }
 
     @Override

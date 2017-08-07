@@ -91,7 +91,7 @@
             <include
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                layout="@layout/horizontal_list"
+                layout="@layout/recommendation_list"
                 tools:layout_editor_absoluteX="0dp"
                 android:id="@+id/include1"
                 app:layout_constraintTop_toBottomOf="@+id/imageView_main_map"
@@ -102,7 +102,7 @@
             <include
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                layout="@layout/horizontal_list"
+                layout="@layout/recommendation_list"
                 tools:layout_editor_absoluteX="0dp"
                 android:id="@+id/include2"
                 app:layout_constraintTop_toBottomOf="@+id/include1"
