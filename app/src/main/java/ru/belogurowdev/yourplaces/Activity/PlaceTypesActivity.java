@@ -46,18 +46,19 @@ public class PlaceTypesActivity extends AppCompatActivity {
         mPlaceTypes.add(new PlaceType("Bar", R.drawable.bar));
         mPlaceTypes.add(new PlaceType("Hospital", R.drawable.hospital));
         mPlaceTypes.add(new PlaceType("Library", R.drawable.library));
+        mPlaceTypes.add(new PlaceType("Hotel", R.drawable.hotel));
+        mPlaceTypes.add(new PlaceType("Parking", R.drawable.parking));
+        mPlaceTypes.add(new PlaceType("Cinema", R.drawable.cinema));
+        mPlaceTypes.add(new PlaceType("Bank", R.drawable.bank));
+        mPlaceTypes.add(new PlaceType("Cafe", R.drawable.cafe));
+        mPlaceTypes.add(new PlaceType("Airport", R.drawable.airport));
+        mPlaceTypes.add(new PlaceType("Mall", R.drawable.mall));
 
         /*
-        mPlaceTypes.add(new PlaceType("Airport", getIcon(MaterialDesignIconic.Icon.gmi_local_airport)));
         mPlaceTypes.add(new PlaceType("Atm", getIcon(MaterialDesignIconic.Icon.gmi_local_atm)));
-        mPlaceTypes.add(new PlaceType("Bank", getIcon(MaterialDesignIconic.Icon.gmi_money)));
-        mPlaceTypes.add(new PlaceType("Cafe", getIcon(MaterialDesignIconic.Icon.gmi_local_cafe)));
-        mPlaceTypes.add(new PlaceType("Hotel", getIcon(MaterialDesignIconic.Icon.gmi_local_hotel)));
-        mPlaceTypes.add(new PlaceType("Cinema", getIcon(MaterialDesignIconic.Icon.gmi_local_movies)));
-        mPlaceTypes.add(new PlaceType("Parking", getIcon(MaterialDesignIconic.Icon.gmi_local_parking)));
         mPlaceTypes.add(new PlaceType("Pharmacy", getIcon(MaterialDesignIconic.Icon.gmi_local_pharmacy)));
-        mPlaceTypes.add(new PlaceType("Mall", getIcon(MaterialDesignIconic.Icon.gmi_local_mall)));
         */
+
         mAdapter = new PlaceTypesAdapter(this, mPlaceTypes);
 
         LayoutManager layoutManager = new GridLayoutManager(this, 2);

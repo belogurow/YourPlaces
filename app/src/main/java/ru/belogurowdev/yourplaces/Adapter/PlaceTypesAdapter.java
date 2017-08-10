@@ -1,12 +1,19 @@
 package ru.belogurowdev.yourplaces.Adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.v7.graphics.Palette;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -31,7 +38,10 @@ public class PlaceTypesAdapter extends RecyclerView.Adapter<PlaceTypesAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.textView_card_type) TextView mTextViewType;
-        @BindView(R.id.imageView_card_type) ImageView mImageViewIcon;
+        @BindView(R.id.imageView_card_background) ImageView mImageViewBackground;
+        @BindView(R.id.card_place_type) CardView mCardView;
+
+        public static final int DEFAULT_COLOR = 0x000000;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -47,12 +57,29 @@ public class PlaceTypesAdapter extends RecyclerView.Adapter<PlaceTypesAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         final PlaceType placeType = mPlaceTypes.get(position);
 
         holder.mTextViewType.setText(placeType.getType());
-        holder.itemView.setBackground(mContext.getResources().getDrawable(placeType.getBackgroundImage()));
-        //holder.mImageViewIcon.setImageDrawable(placeType.getBackground());
+
+        Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), placeType.getBackgroundImage());
+        holder.mImageViewBackground.setImageBitmap(bitmap);
+
+        if (bitmap != null && !bitmap.isRecycled()) {
+            Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+                @Override
+                public void onGenerated(Palette palette) {
+                    List<Palette.Swatch> vibrantSwatch = palette.getSwatches();
+                    holder.mCardView.setCardBackgroundColor(vibrantSwatch.get(1).getRgb());
+                    holder.mTextViewType.setTextColor(vibrantSwatch.get(1).getTitleTextColor());
+                }
+            });
+        }
+        /*
+        Glide.with(mContext)
+                .placeholder(placeType.getBackgroundImage())
+                .into(holder.mImageViewBackground);
+                */
     }
 
     @Override
