@@ -1,5 +1,6 @@
 package ru.belogurowdev.yourplaces.Activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
@@ -30,7 +31,7 @@ public class PlaceTypesActivity extends AppCompatActivity {
     private List<PlaceType> mPlaceTypes;
     private PlaceTypesAdapter mAdapter;
 
-    @BindView(R.id.category_toolbar) Toolbar mToolbar;
+    @BindView(R.id.toolbar_category) Toolbar mToolbar;
     @BindView(R.id.rv_place_type) RecyclerView mRecyclerView;
 
     @Override
@@ -39,10 +40,28 @@ public class PlaceTypesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_place_types);
         ButterKnife.bind(this);
 
+        final String country = getIntent().getStringExtra("COUNTRY");
+
         setToolbar();
+        setPlacesList();
+        setAdapter(country);
+        setRecyclerView();
+    }
 
+    private void setRecyclerView() {
+        LayoutManager layoutManager = new GridLayoutManager(this, 2);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+    private void setAdapter(String country) {
+        Intent placesListIntent = new Intent(this, PlacesListActivity.class);
+        placesListIntent.putExtra("COUNTRY", country);
+        mAdapter = new PlaceTypesAdapter(this, placesListIntent, mPlaceTypes);
+    }
+
+    private void setPlacesList() {
         mPlaceTypes = new ArrayList<>();
-
         mPlaceTypes.add(new PlaceType("Bar", R.drawable.bar));
         mPlaceTypes.add(new PlaceType("Hospital", R.drawable.hospital));
         mPlaceTypes.add(new PlaceType("Library", R.drawable.library));
@@ -53,27 +72,6 @@ public class PlaceTypesActivity extends AppCompatActivity {
         mPlaceTypes.add(new PlaceType("Cafe", R.drawable.cafe));
         mPlaceTypes.add(new PlaceType("Airport", R.drawable.airport));
         mPlaceTypes.add(new PlaceType("Mall", R.drawable.mall));
-
-        /*
-        mPlaceTypes.add(new PlaceType("Atm", getIcon(MaterialDesignIconic.Icon.gmi_local_atm)));
-        mPlaceTypes.add(new PlaceType("Pharmacy", getIcon(MaterialDesignIconic.Icon.gmi_local_pharmacy)));
-        */
-
-        mAdapter = new PlaceTypesAdapter(this, mPlaceTypes);
-
-        LayoutManager layoutManager = new GridLayoutManager(this, 2);
-        mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setAdapter(mAdapter);
-
-
-                /* Drawable iconPin = new IconicsDrawable(this)
-                .icon(MaterialDesignIconic.Icon.gmi_pin)
-                .color(Color.WHITE)
-                .sizeDp(24);
-        mImageViewPin.setImageDrawab
-        */
-
-
     }
 
 
@@ -85,10 +83,5 @@ public class PlaceTypesActivity extends AppCompatActivity {
 
     }
 
-    private Drawable getIcon(MaterialDesignIconic.Icon icon) {
-        return new IconicsDrawable(this)
-                .icon(icon)
-                .color(Color.BLACK)
-                .sizeDp(24);
-    }
+
 }

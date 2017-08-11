@@ -30,15 +30,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activity.MainActivity"/>
         </activity>
-
         <activity
             android:name=".Activity.PlaceTypesActivity"
             android:label="@string/choose_type"
             android:parentActivityName=".Activity.MainActivity">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activity.MainActivity"/>
+        </activity>
+
+        <activity
+            android:name=".Activity.PlacesListActivity"
+            android:label="@string/choose_place"
+            android:parentActivityName=".Activity.PlaceTypesActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activity.PlaceTypesActivity"/>
         </activity>
 
         <meta-data

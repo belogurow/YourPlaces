@@ -38,15 +38,13 @@ public class MainActivity extends AppCompatActivity {
     final static int PLACE_PICKER_REQUEST = 1;
     final static String TAG = "info";
 
-    @BindView(R.id.main_toolbar) Toolbar mToolbar;
+    @BindView(R.id.toolbar_main) Toolbar mToolbar;
     @BindView(R.id.textView_main_map) TextView mTextViewMap;
     @BindView(R.id.imageView_main_pin) ImageView mImageViewPin;
     @BindView(R.id.imageView_main_map) ImageView mImageViewMap;
 
     @BindView(R.id.include1) View include1;
     @BindView(R.id.include2) View include2;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

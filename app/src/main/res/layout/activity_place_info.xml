@@ -27,7 +27,7 @@
                 app:layout_collapseMode="parallax"/>
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/placeinfo_toolbar"
+                android:id="@+id/toolbar_placeinfo"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin" >

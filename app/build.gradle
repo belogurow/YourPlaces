@@ -38,6 +38,7 @@ dependencies {
 
     // Retrofit
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
 
     // Navigation Drawer
     compile('com.mikepenz:materialdrawer:5.9.4@aar') {

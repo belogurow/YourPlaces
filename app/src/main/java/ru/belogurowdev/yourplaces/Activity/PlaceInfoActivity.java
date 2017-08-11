@@ -29,7 +29,7 @@ import ru.belogurowdev.yourplaces.R;
 
 public class PlaceInfoActivity extends AppCompatActivity implements OnConnectionFailedListener {
 
-    @BindView(R.id.placeinfo_toolbar) Toolbar mToolbar;
+    @BindView(R.id.toolbar_placeinfo) Toolbar mToolbar;
     @BindView(R.id.imageView_header) ImageView mImageViewHeader;
     @BindView(R.id.textView_test) TextView mTextViewTest;
 

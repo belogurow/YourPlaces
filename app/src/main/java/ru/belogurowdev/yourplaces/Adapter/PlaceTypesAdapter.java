@@ -1,6 +1,7 @@
 package ru.belogurowdev.yourplaces.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.graphics.Palette;
@@ -28,18 +29,21 @@ import ru.belogurowdev.yourplaces.R;
 
 public class PlaceTypesAdapter extends RecyclerView.Adapter<PlaceTypesAdapter.ViewHolder> {
     private Context mContext;
+    private Intent placesListIntent;
     private List<PlaceType> mPlaceTypes;
 
 
-    public PlaceTypesAdapter(Context context, List<PlaceType> placeTypes) {
-        mContext = context;
-        mPlaceTypes = placeTypes;
+    public PlaceTypesAdapter(Context context, Intent placesListIntent, List<PlaceType> placeTypes) {
+        this.mContext = context;
+        this.placesListIntent = placesListIntent;
+        this.mPlaceTypes = placeTypes;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.textView_card_type) TextView mTextViewType;
         @BindView(R.id.imageView_card_background) ImageView mImageViewBackground;
         @BindView(R.id.card_place_type) CardView mCardView;
+
 
         public static final int DEFAULT_COLOR = 0x000000;
 
@@ -75,11 +79,14 @@ public class PlaceTypesAdapter extends RecyclerView.Adapter<PlaceTypesAdapter.Vi
                 }
             });
         }
-        /*
-        Glide.with(mContext)
-                .placeholder(placeType.getBackgroundImage())
-                .into(holder.mImageViewBackground);
-                */
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                placesListIntent.putExtra("TYPE", placeType.getType());
+                mContext.startActivity(placesListIntent);
+            }
+        });
     }
 
     @Override

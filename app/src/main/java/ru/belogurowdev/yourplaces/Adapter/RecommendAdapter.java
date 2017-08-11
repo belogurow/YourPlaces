@@ -45,15 +45,18 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         final String cardTitle = mRecommendation.getCardTitle(position);
         holder.mTextViewCardTitle.setText(cardTitle);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent categoryIntent = new Intent(mContext, PlaceTypesActivity.class);
-                mContext.startActivity(categoryIntent);
+                if (mRecommendation.getRecommendationTitle().equals("Countries for tourism")) {
+                    Intent placeTypeIntent = new Intent(mContext, PlaceTypesActivity.class);
+                    placeTypeIntent.putExtra("COUNTRY", mRecommendation.getCardTitle(position));
+                    mContext.startActivity(placeTypeIntent);
+                }
             }
         });
     }
