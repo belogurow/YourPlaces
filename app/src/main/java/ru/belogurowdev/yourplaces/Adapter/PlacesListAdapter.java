@@ -88,6 +88,7 @@ public class PlacesListAdapter extends RecyclerView.Adapter<PlacesListAdapter.Vi
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                             holder.mProgressBar.setVisibility(View.GONE);
+                            holder.mImageViewPlacePhoto.setImageResource(R.drawable.no_image);
                             return false;
                         }
 

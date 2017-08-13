@@ -7,4 +7,22 @@
     <string name="pick_on_the_map">Выбрать место на карте</string>
     <string name="nav_contact">Свяжитесь со мной</string>
     <string name="nav_openSource">Открытый исходный код</string>
+    <string name="more">БОЛЬШЕ</string>
+    <string name="Usa">США</string>
+    <string name="Italy">Италия</string>
+    <string name="France">Франция</string>
+    <string name="Russia">Россия</string>
+    <string name="choose_type">Выберите тип</string>
+    <string name="bar">Бар</string>
+    <string name="hospital">Больница</string>
+    <string name="library">Библиотека</string>
+    <string name="hotel">Отель</string>
+    <string name="parking">Парковка</string>
+    <string name="cinema">Кино</string>
+    <string name="bank">Банк</string>
+    <string name="cafe">Кафе</string>
+    <string name="airport">Аэропорт</string>
+    <string name="mall">Торговый центр</string>
+    <string name="choose_place">Выберите место</string>
+    <string name="countries_for_tourism">Страны для туризма</string>
 </resources>

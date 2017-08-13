@@ -52,31 +52,6 @@ public class PlaceTypesActivity extends AppCompatActivity {
         setRecyclerView();
     }
 
-    private void setRecyclerView() {
-        LayoutManager layoutManager = new GridLayoutManager(this, 2);
-        mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setAdapter(mAdapter);
-    }
-
-    private void setAdapter(String country) {
-        mAdapter = new PlaceTypesAdapter(this, country, mPlaceTypes);
-    }
-
-    private void setPlacesList() {
-        mPlaceTypes = new ArrayList<>();
-        mPlaceTypes.add(new PlaceType("Bar", R.drawable.bar));
-        mPlaceTypes.add(new PlaceType("Hospital", R.drawable.hospital));
-        mPlaceTypes.add(new PlaceType("Library", R.drawable.library));
-        mPlaceTypes.add(new PlaceType("Hotel", R.drawable.hotel));
-        mPlaceTypes.add(new PlaceType("Parking", R.drawable.parking));
-        mPlaceTypes.add(new PlaceType("Cinema", R.drawable.cinema));
-        mPlaceTypes.add(new PlaceType("Bank", R.drawable.bank));
-        mPlaceTypes.add(new PlaceType("Cafe", R.drawable.cafe));
-        mPlaceTypes.add(new PlaceType("Airport", R.drawable.airport));
-        mPlaceTypes.add(new PlaceType("Mall", R.drawable.mall));
-    }
-
-
     private void setToolbar() {
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
@@ -84,6 +59,31 @@ public class PlaceTypesActivity extends AppCompatActivity {
         }
 
     }
+
+    private void setPlacesList() {
+        mPlaceTypes = new ArrayList<>();
+        mPlaceTypes.add(new PlaceType(getString(R.string.airport), R.drawable.airport));
+        mPlaceTypes.add(new PlaceType(getString(R.string.bar), R.drawable.bar));
+        mPlaceTypes.add(new PlaceType(getString(R.string.bank), R.drawable.bank));
+        mPlaceTypes.add(new PlaceType(getString(R.string.cafe), R.drawable.cafe));
+        mPlaceTypes.add(new PlaceType(getString(R.string.cinema), R.drawable.cinema));
+        mPlaceTypes.add(new PlaceType(getString(R.string.hospital), R.drawable.hospital));
+        mPlaceTypes.add(new PlaceType(getString(R.string.hotel), R.drawable.hotel));
+        mPlaceTypes.add(new PlaceType(getString(R.string.library), R.drawable.library));
+        mPlaceTypes.add(new PlaceType(getString(R.string.mall), R.drawable.mall));
+        mPlaceTypes.add(new PlaceType(getString(R.string.parking), R.drawable.parking));
+    }
+
+    private void setAdapter(String country) {
+        mAdapter = new PlaceTypesAdapter(this, country, mPlaceTypes);
+    }
+
+    private void setRecyclerView() {
+        LayoutManager layoutManager = new GridLayoutManager(this, 2);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
 
     @Override
     protected void onPause() {

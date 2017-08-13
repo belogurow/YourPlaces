@@ -66,11 +66,11 @@ public class MainActivity extends AppCompatActivity {
      */
     private void setRecommendationList() {
         // first recommendation
-        Recommendation countryRecommendation = new Recommendation("Countries for tourism");
-        countryRecommendation.addCard("Usa", null);
-        countryRecommendation.addCard("Italy", null);
-        countryRecommendation.addCard("France", null);
-        countryRecommendation.addCard("Russia", null);
+        Recommendation countryRecommendation = new Recommendation(getString(R.string.countries_for_tourism));
+        countryRecommendation.addCard(getString(R.string.Usa), null);
+        countryRecommendation.addCard(getString(R.string.Italy), null);
+        countryRecommendation.addCard(getString(R.string.France), null);
+        countryRecommendation.addCard(getString(R.string.Russia), null);
 
         setNewRecommendation(countryRecommendation, include1);
 

@@ -34,7 +34,7 @@ public class NavDrawer {
     public void setNavigationDrawer() {
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(mActivity)
-                //.withHeaderBackground(R.drawable.hospital)
+                .withHeaderBackground(R.drawable.nav_drawer)
                 .withSelectionListEnabledForSingleProfile(false)
                 .build();
 

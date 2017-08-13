@@ -7,4 +7,22 @@
     <string name="nav_openSource">Open Source</string>
     <string name="nav_contact">Contact me</string>
     <string name="pick_on_the_map">Pick on the Map</string>
+    <string name="more">MORE</string>
+    <string name="Usa">Usa</string>
+    <string name="Italy">Italy</string>
+    <string name="France">France</string>
+    <string name="Russia">Russia</string>
+    <string name="choose_type">Choose type</string>
+    <string name="bar">Bar</string>
+    <string name="hospital">Hospital</string>
+    <string name="library">Library</string>
+    <string name="hotel">Hotel</string>
+    <string name="parking">Parking</string>
+    <string name="cinema">Cinema</string>
+    <string name="bank">Bank</string>
+    <string name="cafe">Cafe</string>
+    <string name="airport">Airport</string>
+    <string name="mall">Mall</string>
+    <string name="choose_place">Choose place</string>
+    <string name="countries_for_tourism">Countries for tourism</string>
 </resources>

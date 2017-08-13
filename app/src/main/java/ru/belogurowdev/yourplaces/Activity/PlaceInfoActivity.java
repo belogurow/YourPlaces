@@ -1,12 +1,11 @@
 package ru.belogurowdev.yourplaces.Activity;
 
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,6 +26,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.belogurowdev.yourplaces.R;
 
+/**
+ * Show place info
+ */
 public class PlaceInfoActivity extends AppCompatActivity implements OnConnectionFailedListener {
 
     @BindView(R.id.toolbar_placeinfo) Toolbar mToolbar;
@@ -153,8 +155,15 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnConnection
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Finish activity when press back button
+            case android.R.id.home:
+                finish();
+                return true;
+        }
 
+
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -52,7 +52,8 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.View
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mRecommendation.getRecommendationTitle().equals("Countries for tourism")) {
+                String titleOne = mContext.getString(R.string.countries_for_tourism);
+                if (mRecommendation.getRecommendationTitle().equals(titleOne)) {
                     Intent placeTypeIntent = new Intent(mContext, PlaceTypesActivity.class);
                     placeTypeIntent.putExtra("COUNTRY", mRecommendation.getCardTitle(position));
                     mContext.startActivity(placeTypeIntent);
