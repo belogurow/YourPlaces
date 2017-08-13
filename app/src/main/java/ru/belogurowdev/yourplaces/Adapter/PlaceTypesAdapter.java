@@ -20,6 +20,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ru.belogurowdev.yourplaces.Activity.PlacesListActivity;
 import ru.belogurowdev.yourplaces.Model.PlaceType;
 import ru.belogurowdev.yourplaces.R;
 
@@ -29,14 +30,17 @@ import ru.belogurowdev.yourplaces.R;
 
 public class PlaceTypesAdapter extends RecyclerView.Adapter<PlaceTypesAdapter.ViewHolder> {
     private Context mContext;
-    private Intent placesListIntent;
+    private String country;
     private List<PlaceType> mPlaceTypes;
 
-
-    public PlaceTypesAdapter(Context context, Intent placesListIntent, List<PlaceType> placeTypes) {
+    public PlaceTypesAdapter(Context context, String country, List<PlaceType> placeTypes) {
         this.mContext = context;
-        this.placesListIntent = placesListIntent;
+        this.country = country;
         this.mPlaceTypes = placeTypes;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -83,6 +87,8 @@ public class PlaceTypesAdapter extends RecyclerView.Adapter<PlaceTypesAdapter.Vi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent placesListIntent = new Intent(mContext, PlacesListActivity.class);
+                placesListIntent.putExtra("COUNTRY", country);
                 placesListIntent.putExtra("TYPE", placeType.getType());
                 mContext.startActivity(placesListIntent);
             }
