@@ -14,6 +14,7 @@ public interface GooglePlacesApi {
     @GET("/maps/api/place/textsearch/json")
     Call<GooglePlace> getPlaces(
             @Query("query") String query,
-            @Query("key") String key);
+            @Query("key") String key,
+            @Query("language") String language);
 
 }

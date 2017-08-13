@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -36,6 +38,10 @@ public class PlacesListActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar_places_list) Toolbar mToolbar;
     @BindView(R.id.rv_places_list) RecyclerView mRecyclerView;
+    @BindView(R.id.progressbar_places_list) ProgressBar mProgressBar;
+
+    boolean loading = true;
+    int lastVisibleItem, visibleItemCount, totalItemCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,17 +58,18 @@ public class PlacesListActivity extends AppCompatActivity {
         mPlacesList = new ArrayList<>();
         mPlaceListAdapter = new PlacesListAdapter(this, mPlacesList);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mPlaceListAdapter);
 
         ControllerPlacesApi placesApi = new ControllerPlacesApi();
-        placesApi.getGooglePlacesApi().getPlaces(country + " " + type, API_KEY).enqueue(new Callback<GooglePlace>() {
+        // TODO ru
+        placesApi.getGooglePlacesApi().getPlaces("in " + country + " " + type, API_KEY, "ru").enqueue(new Callback<GooglePlace>() {
             @Override
             public void onResponse(@NonNull Call<GooglePlace> call, @NonNull Response<GooglePlace> response) {
+                mProgressBar.setVisibility(View.GONE);
                 if (response.body().getStatus().equals(STATUS_OK)) {
                     mGooglePlace = response.body();
-
                     Log.d("places-url", call.request().url().toString());
                     mPlacesList.addAll(mGooglePlace.getResults());
                     Log.d("place1", mPlacesList.toString());

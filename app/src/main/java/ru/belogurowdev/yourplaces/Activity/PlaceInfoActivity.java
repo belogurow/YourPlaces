@@ -57,7 +57,7 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnConnection
 
         buildApiClient();
         placePhotosAsync(placeID);
-        Log.i(TAG, "1");
+        Log.i(TAG, placeID);
         Places.GeoDataApi.getPlaceById(mGoogleApiClient, placeID)
                 .setResultCallback(new ResultCallback<PlaceBuffer>() {
                     @Override
@@ -70,11 +70,7 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnConnection
                         } else {
                             Log.e(TAG, "Place not found");
                         }
-                        Log.i(TAG, myPlace.getName() + " 2 " + myPlace.getAddress());
-                        if (getSupportActionBar() != null) {
-                            Log.i(TAG, "enter");
-                            getSupportActionBar().setTitle(myPlace.getName());
-                        }
+
                         mTextViewTest.setText(myPlace.getName() + " " + myPlace.getAddress());
                         places.release();
 
