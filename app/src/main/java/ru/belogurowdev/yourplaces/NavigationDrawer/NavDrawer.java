@@ -54,15 +54,10 @@ public class NavDrawer {
                 .withIcon(GoogleMaterial.Icon.gmd_favorite);
 
 
-        SecondaryDrawerItem openSource = new SecondaryDrawerItem()
+        SecondaryDrawerItem about = new SecondaryDrawerItem()
                 .withIdentifier(3)
-                .withName(R.string.nav_openSource)
-                .withIcon(FontAwesome.Icon.faw_github);
-
-        SecondaryDrawerItem contact = new SecondaryDrawerItem()
-                .withIdentifier(4)
-                .withName(R.string.nav_contact)
-                .withIcon(MaterialDesignIconic.Icon.gmi_mail_send);
+                .withName(R.string.about)
+                .withIcon(MaterialDesignIconic.Icon.gmi_info);
 
         final Drawer drawerResult = new DrawerBuilder()
                 .withActivity(mActivity)
@@ -73,8 +68,7 @@ public class NavDrawer {
                         history,
                         favourites,
                         new DividerDrawerItem(),
-                        openSource,
-                        contact
+                        about
                 )
                 .withSelectedItem(currentPosition)
                 .withCloseOnClick(true)

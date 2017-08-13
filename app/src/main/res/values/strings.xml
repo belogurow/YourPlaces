@@ -7,6 +7,7 @@
     <string name="nav_favourites">Favourites</string>
     <string name="nav_openSource">Open Source</string>
     <string name="nav_contact">Contact me</string>
+    <string name="about">About</string>
     <!-- end -->
 
     <!-- MainActivity -->
