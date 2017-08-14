@@ -39,6 +39,13 @@
 
     <!-- PlacesListActivity -->
     <string name="choose_place">Choose place</string>
+    
+    <!-- PlaceInfoActivity -->
+    <string name="free">Free</string>
+    <string name="inexpensive">Inexpensive</string>
+    <string name="moderate">Moderate</string>
+    <string name="expensive">Expensive</string>
+    <string name="very_expensive">Very Expensive</string>
 
     
     <!-- AboutAppActivity -->

@@ -37,6 +37,7 @@ import ru.belogurowdev.yourplaces.R;
 public class PlacesListAdapter extends RecyclerView.Adapter<PlacesListAdapter.ViewHolder> {
 
     private final static String API_KEY = "AIzaSyAuJIEnY4TcR-G67YJSgS2CNbPJNABzs3s";
+    private static final String EXTRA_PLACE_ID = "ru.belogurowdev.extras.PLACE_ID";
 
     private Context mContext;
     private List<Result> mPlacesList;
@@ -108,8 +109,7 @@ public class PlacesListAdapter extends RecyclerView.Adapter<PlacesListAdapter.Vi
             @Override
             public void onClick(View view) {
                 Intent placeInfoIntent = new Intent(mContext, PlaceInfoActivity.class);
-                placeInfoIntent.putExtra("PLACE_NAME", place.getName());
-                placeInfoIntent.putExtra("PLACE_ID", place.getPlaceId());
+                placeInfoIntent.putExtra(EXTRA_PLACE_ID, place.getPlaceId());
                 mContext.startActivity(placeInfoIntent);
             }
         });

@@ -36,7 +36,10 @@ public class MainActivity extends AppCompatActivity {
 
     final static int CURRENT_POSITION = 0;
     final static int PLACE_PICKER_REQUEST = 1;
-    final static String TAG = "info";
+
+    private static final String EXTRA_PLACE_ID = "ru.belogurowdev.extras.PLACE_ID";
+
+    final static String TAG = MainActivity.class.getSimpleName();
 
     @BindView(R.id.toolbar_main) Toolbar mToolbar;
     @BindView(R.id.textView_main_map) TextView mTextViewMap;
@@ -111,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
      * PlaceAutoComplete configuration
      */
     private void setPlaceSearchFrag() {
-        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
+        final PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
 
         if (autocompleteFragment.getView() != null) {
@@ -120,7 +123,8 @@ public class MainActivity extends AppCompatActivity {
             autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
                 @Override
                 public void onPlaceSelected(Place place) {
-                    // TODO: Get info about the selected place.
+                    startPlaceInfoActivity(place.getId());
+                    autocompleteFragment.setText("");
                     Log.i(TAG, "Place: " + place.getName() + place.getPriceLevel() + " " + place.getPlaceTypes());
                 }
 
@@ -167,13 +171,14 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // TODO new intent
                 Place place = PlacePicker.getPlace(this, data);
-                String toastMsg = String.format("Place: %s", place.getName());
-                Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
-                Intent placeInfo = new Intent(this, PlaceInfoActivity.class);
-                placeInfo.putExtra("PLACE_ID", place.getId());
-                placeInfo.putExtra("PLACE_NAME", place.getName());
-                startActivity(placeInfo);
+                startPlaceInfoActivity(place.getId());
             }
         }
+    }
+
+    private void startPlaceInfoActivity(String placeId) {
+        Intent placeInfo = new Intent(this, PlaceInfoActivity.class);
+        placeInfo.putExtra(EXTRA_PLACE_ID, placeId);
+        startActivity(placeInfo);
     }
 }

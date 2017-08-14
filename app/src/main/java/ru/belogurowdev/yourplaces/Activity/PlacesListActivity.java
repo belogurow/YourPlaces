@@ -100,7 +100,7 @@ public class PlacesListActivity extends AppCompatActivity {
         }
 
         ControllerPlacesApi placesApi = new ControllerPlacesApi();
-        placesApi.getGooglePlacesApi().getPlaces("in " + country + " " + type, API_KEY, currentLocale.getLanguage()).enqueue(new Callback<GooglePlace>() {
+        placesApi.getGooglePlacesApi().getPlaces(type + " in " + country, API_KEY, currentLocale.getLanguage()).enqueue(new Callback<GooglePlace>() {
             @Override
             public void onResponse(@NonNull Call<GooglePlace> call, @NonNull Response<GooglePlace> response) {
                 mProgressBar.setVisibility(View.GONE);
