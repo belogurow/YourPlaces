@@ -1,9 +1,10 @@
 package ru.belogurowdev.yourplaces.NavigationDrawer;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
-import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -13,13 +14,17 @@ import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
+import ru.belogurowdev.yourplaces.Activity.AboutAppActivity;
+import ru.belogurowdev.yourplaces.Activity.MainActivity;
 import ru.belogurowdev.yourplaces.R;
 
 /**
  * Created by alexbelogurow on 29.07.17.
  */
 
+//TODO maybe singleton
 public class NavDrawer {
     private Activity mActivity;
     private Toolbar mToolbar;
@@ -41,7 +46,15 @@ public class NavDrawer {
         PrimaryDrawerItem search = new PrimaryDrawerItem()
                 .withIdentifier(0)
                 .withName(R.string.nav_search)
-                .withIcon(GoogleMaterial.Icon.gmd_search);
+                .withIcon(GoogleMaterial.Icon.gmd_search)
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        Intent searchActivity = new Intent(mActivity, MainActivity.class);
+                        mActivity.startActivity(searchActivity);
+                        return false;
+                    }
+                });
 
         PrimaryDrawerItem history = new PrimaryDrawerItem()
                 .withIdentifier(1)
@@ -57,7 +70,15 @@ public class NavDrawer {
         SecondaryDrawerItem about = new SecondaryDrawerItem()
                 .withIdentifier(3)
                 .withName(R.string.about)
-                .withIcon(MaterialDesignIconic.Icon.gmi_info);
+                .withIcon(MaterialDesignIconic.Icon.gmi_info)
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        Intent infoActivity = new Intent(mActivity, AboutAppActivity.class);
+                        mActivity.startActivity(infoActivity);
+                        return false;
+                    }
+                });
 
         final Drawer drawerResult = new DrawerBuilder()
                 .withActivity(mActivity)
@@ -71,7 +92,7 @@ public class NavDrawer {
                         about
                 )
                 .withSelectedItem(currentPosition)
-                .withCloseOnClick(true)
+                //.withCloseOnClick(true)
                 .build();
     }
 }

@@ -8,19 +8,21 @@
     <string name="nav_openSource">Open Source</string>
     <string name="nav_contact">Contact me</string>
     <string name="about">About</string>
-    <!-- end -->
 
+    
     <!-- MainActivity -->
     <string name="pick_on_the_map">Pick on the Map</string>
     <string name="countries_for_tourism">Countries for tourism</string>
     <string name="more">MORE</string>
 
+    
     <!--Recommendation list -->
     <string name="Usa">Usa</string>
     <string name="Italy">Italy</string>
     <string name="France">France</string>
     <string name="Russia">Russia</string>
 
+    
     <!-- PlaceTypesActivity -->
     <string name="choose_type">Choose type</string>
     <string name="bar">Bar</string>
@@ -37,5 +39,47 @@
 
     <!-- PlacesListActivity -->
     <string name="choose_place">Choose place</string>
+
+    
+    <!-- AboutAppActivity -->
+    <string name="about_app_description">YourPlaces allows you to find any place of interest
+        around the world. With GooglePlacesApi app has access to a huge number of places and
+        their description.</string>
+    <string name="about_app_developed">
+        Application created by
+        <a href="http://belogurowdev.ru/">Belogurow Alexey</a>
+    </string>
+
+    
+    <!-- AndroidLibraries -->
+    <string name="butter_knife_title">Butter Knife</string>
+    <string name="butter_knife_description">Field and method binding for Android views which
+        uses annotation processing to generate boilerplate code for you.</string>
+    
+    <string name="retrofit2_title">Retrofit 2</string>
+    <string name="retrofit2_description">Type-safe HTTP client for Android 
+        and Java by Square, Inc.</string>
+    
+    <string name="material_drawer_title">MaterialDrawer</string>
+    <string name="material_drawer_description">MaterialDrawer is the flexible, easy to use, all in
+        one drawer library for your Android project.</string>
+
+    <string name="android_iconics_title">Android-Iconics</string>
+    <string name="android_iconics_description">This library allows you to include vector icons
+        everywhere in your project. No limits are given. Scale with no limit, use any color at
+        any time, provide a contour, and many additional customizations.</string>
+
+    <string name="glide_title">Glide</string>
+    <string name="glide_description">Glide is a fast and efficient open source media management
+        and image loading framework for Android that wraps media decoding, memory and disk caching,
+        and resource pooling into a simple and easy to use interface.</string>
+
+    <string name="palette_api_title">Palette API</string>
+    <string name="palette_api_decription">Good visual design is essential for a successful app,
+        and color schemes are a primary component of design. The palette library is a support
+        library that extracts prominent colors from images to help you create
+        visually engaging apps.</string>
+    
+
 
 </resources>

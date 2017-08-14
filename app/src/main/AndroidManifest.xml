@@ -7,8 +7,8 @@
 
     <application
         android:allowBackup="true"
-        android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/LightCustomTheme">
@@ -21,9 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Activity.PlaceInfoActivity"
-            >
+        <activity android:name=".Activity.PlaceInfoActivity">
         </activity>
         <activity
             android:name=".Activity.PlaceTypesActivity"
@@ -33,7 +31,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activity.MainActivity"/>
         </activity>
-
         <activity
             android:name=".Activity.PlacesListActivity"
             android:label="@string/choose_place"
@@ -43,9 +40,13 @@
                 android:value=".Activity.PlaceTypesActivity"/>
         </activity>
 
+        <activity android:name=".Activity.AboutAppActivity">
+        </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCgmDGf_F2chAKZP25MLacyp5EvudbZzuI"/>
+
     </application>
 
 </manifest>
