@@ -25,10 +25,18 @@
     <string name="mall">Торговый центр</string>
     <string name="choose_place">Выберите место</string>
     <string name="countries_for_tourism">Страны для туризма</string>
-    <string name="about">Информация</string>
+    <string name="about">Информация о приложении</string>
     <string name="free">Бесплатное</string>
     <string name="inexpensive">Недорогое</string>
     <string name="expensive">Дорогое</string>
     <string name="very_expensive">Очень дорогое</string>
     <string name="in">в</string>
+    <string name="Malaysia">Малайзия</string>
+    <string name="UK">Англия</string>
+    <string name="Germany">Германия</string>
+    <string name="Turkey">Турция</string>
+    <string name="Spain">Испания</string>
+    <string name="China">Китай</string>
+    <string name="about_app_description">YourPlaces позволяет находить любые интересные места по всему миру. С помощью Google Places Api приложение имеет доступ к огромному количеству мест и их описанию.</string>
+    <string name="about_app_developed">" Разработчик приложения <a href="http://belogurowdev.ru/">Белогуров Алексей</a>     "</string>
 </resources>

@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.imageView_main_map) ImageView mImageViewMap;
 
     @BindView(R.id.include1) View include1;
-    @BindView(R.id.include2) View include2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,19 +71,19 @@ public class MainActivity extends AppCompatActivity {
     private void setRecommendationList() {
         // first recommendation
         Recommendation countryRecommendation = new Recommendation(getString(R.string.countries_for_tourism));
-        countryRecommendation.addCard(getString(R.string.Usa), null);
-        countryRecommendation.addCard(getString(R.string.Italy), null);
-        countryRecommendation.addCard(getString(R.string.France), null);
-        countryRecommendation.addCard(getString(R.string.Russia), null);
+        countryRecommendation.addCard(getString(R.string.Malaysia), getResources().getDrawable(R.drawable.malaysia));
+        countryRecommendation.addCard(getString(R.string.Russia), getResources().getDrawable(R.drawable.russia));
+        countryRecommendation.addCard(getString(R.string.UK), getResources().getDrawable(R.drawable.uk));
+        countryRecommendation.addCard(getString(R.string.Germany), getResources().getDrawable(R.drawable.germany));
+        countryRecommendation.addCard(getString(R.string.Turkey), getResources().getDrawable(R.drawable.turkey));
+        countryRecommendation.addCard(getString(R.string.Italy), getResources().getDrawable(R.drawable.italy));
+        countryRecommendation.addCard(getString(R.string.Spain), getResources().getDrawable(R.drawable.spain));
+        countryRecommendation.addCard(getString(R.string.China), getResources().getDrawable(R.drawable.china));
+        countryRecommendation.addCard(getString(R.string.Usa), getResources().getDrawable(R.drawable.usa));
+        countryRecommendation.addCard(getString(R.string.France), getResources().getDrawable(R.drawable.france));
 
         setNewRecommendation(countryRecommendation, include1);
 
-        // second recommendation TODO test
-        Recommendation placesRecommendation = new Recommendation("Places for everyone");
-        placesRecommendation.addCard("Bar", null);
-        placesRecommendation.addCard("Cafe", null);
-
-        setNewRecommendation(placesRecommendation, include2);
     }
 
     /**
@@ -171,7 +170,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
-                // TODO new intent
                 Place place = PlacePicker.getPlace(this, data);
                 startPlaceInfoActivity(place.getId());
             }

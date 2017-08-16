@@ -29,14 +29,6 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.PlaceBuffer;
-import com.google.android.gms.location.places.PlacePhotoMetadataBuffer;
-import com.google.android.gms.location.places.PlacePhotoMetadataResult;
-import com.google.android.gms.location.places.PlacePhotoResult;
-import com.google.android.gms.location.places.Places;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
@@ -45,10 +37,12 @@ import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -66,7 +60,7 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnConnection
 
     private static final String TAG = PlaceInfoActivity.class.getSimpleName();
     private static final String EXTRA_PLACE_ID = "ru.belogurowdev.extras.PLACE_ID";
-    private static final String EXTRA_PLACE_PHOTO_URL = "ru.belogurowdev.extras.PLACE_PHOTO_URL";
+    private static final String EXTRA_PLACE_PHOTO_REF = "ru.belogurowdev.extras.PLACE_PHOTO_REF";
     private final static String API_KEY = "AIzaSyAI-JOPMs5Yr-NhfbEnf_pNO9jA2bcOCkc";
             //android - "AIzaSyAuJIEnY4TcR-G67YJSgS2CNbPJNABzs3s";
     private final static String STATUS_OK = "OK";
@@ -78,9 +72,8 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnConnection
     @BindView(R.id.text_place_info_name) TextView mTextViewPlaceName;
     @BindView(R.id.recycler_info_icon) RecyclerView mRecyclerView;
 
-    private GoogleApiClient mGoogleApiClient;
     private String mPlaceId;
-    private String mPlacePhotoUrl;
+    private String mPlacePhotoRef;
     private Result mCurrentPlace;
     private PlaceInfoAdapter mAdapter;
 
@@ -97,14 +90,7 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnConnection
 
         setToolbar();
         getExtraDataFromPrevActivity();
-        buildApiClient();
         loadPlaceData();
-        /*
-        if (mPlacePhotoUrl.length() > 0) {
-            loadPlacePhoto();
-        } */
-
-        //placePhotosAsync(mPlaceId);
 
         mInfoList = new ArrayList<>();
         mIconsList = new ArrayList<>();
@@ -123,19 +109,6 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnConnection
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
-    }
-
-
-    private void buildApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, this)
-                .addApi(Places.PLACE_DETECTION_API)
-                .addApi(Places.GEO_DATA_API)
-                .build();
-        mGoogleApiClient.connect();
-
-
     }
 
     private void loadPlaceData() {
@@ -147,7 +120,6 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnConnection
         }
 
         ControllerPlacesApi placesApi = new ControllerPlacesApi();
-        //https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJ_73WOomAhYAR6DBLKOsdF6w&key=AIzaSyAuJIEnY4TcR-G67YJSgS2CNbPJNABzs3s
 
         placesApi.getGooglePlacesApi().getPlaceById(mPlaceId, API_KEY, currentLocale.getLanguage()).enqueue(new Callback<GooglePlaceId>() {
             @Override
@@ -160,6 +132,7 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnConnection
                 } else {
                     errorToast(response.body().getStatus());
                 }
+                Log.d(TAG, call.request().url().toString());
             }
 
             @Override
@@ -169,16 +142,15 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnConnection
         });
     }
 
-
     private void loadPlacePhoto() {
         int width = 720;
-        mPlacePhotoUrl = "https://maps.googleapis.com/maps/api/place/photo?"
+        String photoUrl = "https://maps.googleapis.com/maps/api/place/photo?"
                 + "maxwidth=" + width
-                + "&photoreference=" + mPlacePhotoUrl
+                + "&photoreference=" + mPlacePhotoRef
                 + "&key=" + API_KEY;
 
         Glide.with(this)
-                .load(mPlacePhotoUrl)
+                .load(photoUrl)
                 .transition(new DrawableTransitionOptions().crossFade(300))
                 .listener(new RequestListener<Drawable>() {
                     @Override
@@ -189,7 +161,7 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnConnection
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                         Bitmap bitmap = ((BitmapDrawable)resource).getBitmap();
-                        //mImageViewHeader.setImageBitmap(bitmap);
+                        loadPalette(bitmap);
                         return false;
                     }
                 })
@@ -198,87 +170,43 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnConnection
 
     }
 
+    private void loadPalette(Bitmap bitmap) {
+        Log.d(TAG, "1 - palette");
+        if (bitmap != null && !bitmap.isRecycled()) {
+            Log.d(TAG, "2 - palette");
+            Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+                @Override
+                public void onGenerated(Palette palette) {
+                    List<Palette.Swatch> swatchList = palette.getSwatches();
+                    Palette.Swatch vibrantSwatch = swatchList.get(0);
 
-    /*
-    private void placePhotosAsync(final String placeId) {
-        Places.GeoDataApi.getPlacePhotos(mGoogleApiClient, placeId)
-                .setResultCallback(new ResultCallback<PlacePhotoMetadataResult>() {
-                    @Override
-                    public void onResult(PlacePhotoMetadataResult photos) {
-                        if (!photos.getStatus().isSuccess()) {
-                            Log.d(TAG, "onResult1");
-                            return;
+                    if (vibrantSwatch != null) {
+                        int headerColor = vibrantSwatch.getRgb();
+                        int statusBarColor = getDarkerColor(headerColor, 0.9f);
+                        int titleTextColor = vibrantSwatch.getTitleTextColor();
+
+                        mTextViewPlaceName.setBackgroundColor(headerColor);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            getWindow().setStatusBarColor(statusBarColor);
                         }
-
-                        PlacePhotoMetadataBuffer photoMetadataBuffer = photos.getPhotoMetadata();
-                        if (photoMetadataBuffer.getCount() > 0) {
-                            Log.d(TAG, "onResult2");
-                            // Display the first bitmap in an ImageView in the size of the view
-                            photoMetadataBuffer.get(0)
-                                    .getScaledPhoto(mGoogleApiClient, mImageViewHeader.getWidth(),
-                                            mImageViewHeader.getHeight())
-                                    .setResultCallback(mDisplayPhotoResultCallback);
-
-                        } else {
-                            Log.d(TAG, "onResult3");
-                            placeDataAsync(placeId);
-                        }
-                        photoMetadataBuffer.release();
-
-
+                        mCollapsingToolbar.setContentScrimColor(headerColor);
+                        mTextViewPlaceName.setTextColor(titleTextColor);
                     }
-                });
+                    /*
+                    Palette.Swatch lightVibrantSwath = palette.getLightVibrantSwatch();
+                    lightVibrantSwath = swatchList.get(1);
+                    if (lightVibrantSwath != null) {
+                        int backgroundColor = lightVibrantSwath.getRgb();
+                        textColor = lightVibrantSwath.getBodyTextColor();
+                        mTextViewPlaceName.getRootView().setBackgroundColor(backgroundColor);
+                    }
+                    */
+
+                }
+            });
+        }
     }
 
-    private ResultCallback<PlacePhotoResult> mDisplayPhotoResultCallback
-            = new ResultCallback<PlacePhotoResult>() {
-        @Override
-        public void onResult(PlacePhotoResult placePhotoResult) {
-            if (!placePhotoResult.getStatus().isSuccess()) {
-                Log.d(TAG, "onResult4");
-                return;
-            }
-
-            Bitmap bitmap = placePhotoResult.getBitmap();
-            mImageViewHeader.setImageBitmap(bitmap);
-
-            if (bitmap != null && !bitmap.isRecycled()) {
-                Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
-                    @Override
-                    public void onGenerated(Palette palette) {
-                        List<Palette.Swatch> swatchList = palette.getSwatches();
-                        Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
-
-                        vibrantSwatch = swatchList.get(0);
-                        if (vibrantSwatch != null) {
-                            int headerColor = vibrantSwatch.getRgb();
-                            int statusBarColor = getDarkerColor(headerColor, 0.9f);
-                            int titleTextColor = vibrantSwatch.getTitleTextColor();
-
-                            mTextViewPlaceName.setBackgroundColor(headerColor);
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                getWindow().setStatusBarColor(statusBarColor);
-                            }
-                            mCollapsingToolbar.setContentScrimColor(headerColor);
-                            mTextViewPlaceName.setTextColor(titleTextColor);
-                        }
-
-                        Palette.Swatch lightVibrantSwath = palette.getLightVibrantSwatch();
-                        lightVibrantSwath = swatchList.get(1);
-                        if (lightVibrantSwath != null) {
-                            int backgroundColor = lightVibrantSwath.getRgb();
-                            textColor = lightVibrantSwath.getBodyTextColor();
-                            mTextViewPlaceName.getRootView().setBackgroundColor(backgroundColor);
-                        }
-
-                    }
-                });
-            }
-            Log.d(TAG, "onResult5");
-            placeDataAsync(mPlaceId);
-
-        }
-    };*/
 
     private int getDarkerColor(int color, float factor) {
         int a = Color.alpha( color );
@@ -300,10 +228,10 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnConnection
         mTextViewPlaceName.setText(mCurrentPlace.getName());
         // if (mCurrentPlace.getPhotos() == null) ==> no photo available
         if (mCurrentPlace.getPhotos() != null) {
-            if (mPlacePhotoUrl != null && mPlacePhotoUrl.length() > 0) {
+            if (mPlacePhotoRef != null && mPlacePhotoRef.length() > 0) {
                 loadPlacePhoto();
             } else {
-                mPlacePhotoUrl = mCurrentPlace.getPhotos().get(0).getPhotoReference();
+                mPlacePhotoRef = mCurrentPlace.getPhotos().get(0).getPhotoReference();
                 loadPlacePhoto();
             }
         }
@@ -378,7 +306,7 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnConnection
         }
 
         mProgressBar.setVisibility(View.GONE);
-        //saveToRealm();
+        saveToRealm();
         mAdapter.notifyDataSetChanged();
     }
 
@@ -386,18 +314,24 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnConnection
         Realm realm = null;
         try {
             realm = Realm.getDefaultInstance();
-            realm.executeTransaction(new Realm.Transaction() {
+            realm.executeTransactionAsync(new Realm.Transaction() {
                 @Override
                 public void execute(Realm realm) {
                     PlaceRealm placeRealm = new PlaceRealm(
-                            mCurrentPlace.getId(),
+                            mCurrentPlace.getPlaceId(),
                             mCurrentPlace.getName(),
                             mCurrentPlace.getFormattedAddress(),
-                            mCurrentPlace.getRating().floatValue());
+                            mCurrentPlace.getRating(),
+                            mPlacePhotoRef,
+                            Calendar.getInstance().getTime());
                     realm.insertOrUpdate(placeRealm);
 
                 }
             });
+
+            final RealmResults<PlaceRealm> placeRealms = realm.where(PlaceRealm.class).findAll();
+            Log.d(TAG, placeRealms.toString());
+            Log.d(TAG, placeRealms.size() + "");
         } finally {
             if (realm != null) {
                 realm.close();
@@ -412,7 +346,7 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnConnection
 
     public void getExtraDataFromPrevActivity() {
         mPlaceId = getIntent().getStringExtra(EXTRA_PLACE_ID);
-        mPlacePhotoUrl = getIntent().getStringExtra(EXTRA_PLACE_PHOTO_URL);
+        mPlacePhotoRef = getIntent().getStringExtra(EXTRA_PLACE_PHOTO_REF);
     }
 
     /**

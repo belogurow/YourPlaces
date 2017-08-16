@@ -5,7 +5,9 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Result {
+import io.realm.RealmModel;
+
+public class Result implements RealmModel {
 
     @SerializedName("address_components")
     @Expose
@@ -179,6 +181,9 @@ public class Result {
     }
 
     public Double getRating() {
+        if (rating == null) {
+            return 0.0;
+        }
         return rating;
     }
 

@@ -70,10 +70,12 @@ public class NavDrawer {
                     }
                 });
 
+        /*
         PrimaryDrawerItem favourites = new PrimaryDrawerItem()
                 .withIdentifier(2)
                 .withName(R.string.nav_favourites)
                 .withIcon(GoogleMaterial.Icon.gmd_favorite);
+                */
 
 
         SecondaryDrawerItem about = new SecondaryDrawerItem()
@@ -96,7 +98,7 @@ public class NavDrawer {
                 .addDrawerItems(
                         search,
                         history,
-                        favourites,
+                        //favourites,
                         new DividerDrawerItem(),
                         about
                 )

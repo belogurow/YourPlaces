@@ -23,33 +23,35 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
+import com.google.android.gms.location.places.Place;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.RealmResults;
 import ru.belogurowdev.yourplaces.Activity.PlaceInfoActivity;
-import ru.belogurowdev.yourplaces.Activity.PlacesListActivity;
-import ru.belogurowdev.yourplaces.Api.GooglePlacesList.Result;
+import ru.belogurowdev.yourplaces.Api.GooglePlaceID.Result;
+import ru.belogurowdev.yourplaces.Model.PlaceRealm;
 import ru.belogurowdev.yourplaces.R;
 
 /**
- * Created by alexbelogurow on 11.08.17.
+ * Created by alexbelogurow on 16.08.17.
  */
 
-public class PlacesListAdapter extends RecyclerView.Adapter<PlacesListAdapter.ViewHolder> {
+public class PlacesHistoryAdapter extends RecyclerView.Adapter<PlacesHistoryAdapter.ViewHolder> {
 
-    private static final String TAG = PlacesListActivity.class.getSimpleName();
+    private static final String TAG = PlacesHistoryAdapter.class.getSimpleName();
     private final static String API_KEY = "AIzaSyAI-JOPMs5Yr-NhfbEnf_pNO9jA2bcOCkc";
-                            //android - "AIzaSyAuJIEnY4TcR-G67YJSgS2CNbPJNABzs3s";
+    //android - "AIzaSyAuJIEnY4TcR-G67YJSgS2CNbPJNABzs3s";
     private static final String EXTRA_PLACE_ID = "ru.belogurowdev.extras.PLACE_ID";
-    private static final String EXTRA_PLACE_PHOTO_REF = "ru.belogurowdev.extras.PLACE_PHOTO_REF";
+    private static final String EXTRA_PLACE_PHOTO_URL = "ru.belogurowdev.extras.PLACE_PHOTO_URL";
     private RequestOptions mRequestOptions;
 
     private Context mContext;
-    private List<Result> mPlacesList;
+    private RealmResults<PlaceRealm> mPlacesList;
 
-    public PlacesListAdapter(Context context,@Nullable List<Result> placesList) {
+    public PlacesHistoryAdapter(Context context,@Nullable RealmResults<PlaceRealm> placesList) {
         mContext = context;
         mPlacesList = placesList;
         mRequestOptions = new RequestOptions()
@@ -82,26 +84,23 @@ public class PlacesListAdapter extends RecyclerView.Adapter<PlacesListAdapter.Vi
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        final Result place = mPlacesList.get(position);
+        final PlaceRealm place = mPlacesList.get(position);
 
-        holder.mTextViewPlaceName.setText(place.getName());
-        holder.mTextViewPlaceAddress.setText(place.getFormattedAddress());
-        if (place.getRating() != null) {
-            holder.mTextViewRating.setText(place.getRating().toString());
+        holder.mTextViewPlaceName.setText(place.getPlaceName());
+        holder.mTextViewPlaceAddress.setText(place.getPlaceAddress());
+        if (place.getPlaceRating() != 0.0) {
+            holder.mTextViewRating.setText(String.valueOf(place.getPlaceRating()));
             holder.mTextViewRating.setTextColor(mContext.getResources().getColor(R.color.accent_material_light));
-            holder.mRatingBar.setRating(place.getRating().floatValue());
+            holder.mRatingBar.setRating((float) place.getPlaceRating());
         }
 
         // Load place image if it exists
-        if (place.getPhotos() != null) {
+        if (place.getPhotoReference().length() > 0) {
             int width = 720;
             String photoUrl = "https://maps.googleapis.com/maps/api/place/photo?"
                     + "maxwidth=" + width
-                    + "&photoreference=" + place.getPhotos().get(0).getPhotoReference()
+                    + "&photoreference=" + place.getPhotoReference()
                     + "&key=" + API_KEY;
-            Log.d(TAG, position + " " + photoUrl);
-
-
             Glide.with(mContext)
                     .load(photoUrl)
                     .transition(new DrawableTransitionOptions().crossFade(300))
@@ -125,18 +124,15 @@ public class PlacesListAdapter extends RecyclerView.Adapter<PlacesListAdapter.Vi
             holder.mProgressBar.setVisibility(View.GONE);
             holder.mImageViewPlacePhoto.setImageResource(R.drawable.no_image);
         }
-
+        Log.d(TAG, "1 " + place.toString());
 
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent placeInfoIntent = new Intent(mContext, PlaceInfoActivity.class);
                 placeInfoIntent.putExtra(EXTRA_PLACE_ID, place.getPlaceId());
-                if (place.getPhotos() != null) {
-                    placeInfoIntent.putExtra(EXTRA_PLACE_PHOTO_REF, place.getPhotos().get(0).getPhotoReference());
-                } else {
-                    placeInfoIntent.putExtra(EXTRA_PLACE_PHOTO_REF, "");
-                }
+                Log.d(TAG, "2 " + place.toString());
+                placeInfoIntent.putExtra(EXTRA_PLACE_PHOTO_URL, place.getPhotoReference());
                 mContext.startActivity(placeInfoIntent);
             }
         });

@@ -9,7 +9,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ControllerPlacesApi {
     private static final String BASE_URL = "https://maps.googleapis.com";
-    // TODO ??? private static final String API_KEY = "AIzaSyAuJIEnY4TcR-G67YJSgS2CNbPJNABzs3s";
 
     private static GooglePlacesApi sGooglePlacesApi;
     private Retrofit mRetrofit;
