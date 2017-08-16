@@ -22,7 +22,6 @@ import ru.belogurowdev.yourplaces.R;
  */
 
 public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.ViewHolder> {
-
     private Context mContext;
     private Recommendation mRecommendation;
 
