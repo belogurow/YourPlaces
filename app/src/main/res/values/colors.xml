@@ -14,5 +14,8 @@
 
     <color name="primary_text_material_light">#ffffffff</color>
     <color name="secondary_text_material_dark">#ffffffff</color>
+    
+    <color name="headline_text">#dd000000</color>
+    <color name="subhead_text">#57000000</color>
 
 </resources>

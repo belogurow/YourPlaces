@@ -18,6 +18,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import ru.belogurowdev.yourplaces.Activity.AboutAppActivity;
 import ru.belogurowdev.yourplaces.Activity.MainActivity;
+import ru.belogurowdev.yourplaces.Activity.PlaceHistoryActivity;
 import ru.belogurowdev.yourplaces.R;
 
 /**
@@ -59,7 +60,15 @@ public class NavDrawer {
         PrimaryDrawerItem history = new PrimaryDrawerItem()
                 .withIdentifier(1)
                 .withName(R.string.nav_history)
-                .withIcon(GoogleMaterial.Icon.gmd_history);
+                .withIcon(GoogleMaterial.Icon.gmd_history)
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        Intent historyActivity = new Intent(mActivity, PlaceHistoryActivity.class);
+                        mActivity.startActivity(historyActivity);
+                        return false;
+                    }
+                });
 
         PrimaryDrawerItem favourites = new PrimaryDrawerItem()
                 .withIdentifier(2)

@@ -27,6 +27,7 @@ import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.realm.Realm;
 import ru.belogurowdev.yourplaces.Adapter.RecommendAdapter;
 import ru.belogurowdev.yourplaces.Model.Recommendation;
 import ru.belogurowdev.yourplaces.NavigationDrawer.NavDrawer;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        Realm.init(this);
 
         setToolbar();
         setPlaceSearchFrag();
@@ -125,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onPlaceSelected(Place place) {
                     startPlaceInfoActivity(place.getId());
                     autocompleteFragment.setText("");
-                    Log.i(TAG, "Place: " + place.getName() + place.getPriceLevel() + " " + place.getPlaceTypes());
+                    Log.i(TAG, "PlaceRealm: " + place.getName() + place.getPriceLevel() + " " + place.getPlaceTypes());
                 }
 
                 @Override
@@ -138,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Place picker configuration, image with text and icon
+     * PlaceRealm picker configuration, image with text and icon
      */
     private void setPlacePicker() {
         mTextViewMap.setText(R.string.pick_on_the_map);

@@ -43,7 +43,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
+import io.realm.Realm;
 import ru.belogurowdev.yourplaces.Adapter.PlaceInfoAdapter;
+import ru.belogurowdev.yourplaces.Model.PlaceRealm;
 import ru.belogurowdev.yourplaces.R;
 
 /**
@@ -215,7 +217,7 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnConnection
                             currentPlace = places.get(0);
                             loadInfoAboutPlace();
                         } else {
-                            Log.e(TAG, "Place not found");
+                            Log.e(TAG, "PlaceRealm not found");
                         }
 
                         places.release();
@@ -297,7 +299,31 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnConnection
         }
 
         mProgressBar.setVisibility(View.GONE);
+        saveToRealm();
         mAdapter.notifyDataSetChanged();
+    }
+
+    private void saveToRealm() {
+        Realm realm = null;
+        try {
+            realm = Realm.getDefaultInstance();
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    PlaceRealm placeRealm = new PlaceRealm(
+                            currentPlace.getId(),
+                            currentPlace.getName().toString(),
+                            currentPlace.getAddress().toString(),
+                            currentPlace.getRating());
+                    realm.insertOrUpdate(placeRealm);
+
+                }
+            });
+        } finally {
+            if (realm != null) {
+                realm.close();
+            }
+        }
     }
 
     @Override

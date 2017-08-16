@@ -1,5 +1,8 @@
 package ru.belogurowdev.yourplaces.Activity;
 
+import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -69,6 +72,7 @@ public class PlacesListActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
+
     private void getExtraDataFromPrevActivity() {
         country = getIntent().getStringExtra("COUNTRY");
         type = getIntent().getStringExtra("TYPE");
@@ -100,7 +104,8 @@ public class PlacesListActivity extends AppCompatActivity {
         }
 
         ControllerPlacesApi placesApi = new ControllerPlacesApi();
-        placesApi.getGooglePlacesApi().getPlaces(type + " in " + country, API_KEY, currentLocale.getLanguage()).enqueue(new Callback<GooglePlace>() {
+        //String type = getLocaleStringResource(new Locale("en"), ty)
+        placesApi.getGooglePlacesApi().getPlaces(type + " в " + country, API_KEY, currentLocale.getLanguage()).enqueue(new Callback<GooglePlace>() {
             @Override
             public void onResponse(@NonNull Call<GooglePlace> call, @NonNull Response<GooglePlace> response) {
                 mProgressBar.setVisibility(View.GONE);
@@ -135,6 +140,31 @@ public class PlacesListActivity extends AppCompatActivity {
         }
 
         Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+    }
+
+    public static String getLocaleStringResource(Locale requestedLocale, int resourceId, Context context) {
+        String result;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) { // use latest api
+            Configuration config = new Configuration(context.getResources().getConfiguration());
+            config.setLocale(requestedLocale);
+            result = context.createConfigurationContext(config).getText(resourceId).toString();
+        }
+        else { // support older android versions
+            Resources resources = context.getResources();
+            Configuration conf = resources.getConfiguration();
+            Locale savedLocale = conf.locale;
+            conf.locale = requestedLocale;
+            resources.updateConfiguration(conf, null);
+
+            // retrieve resources from desired locale
+            result = resources.getString(resourceId);
+
+            // restore original locale
+            conf.locale = savedLocale;
+            resources.updateConfiguration(conf, null);
+        }
+
+        return result;
     }
 }
 

@@ -25,4 +25,11 @@
     <string name="mall">Mall</string>
     <string name="choose_place">Choose place</string>
     <string name="countries_for_tourism">Countries for tourism</string>
+    <string name="about">About</string>
+    <string name="free">Free</string>
+    <string name="inexpensive">Inexpensive</string>
+    <string name="moderate">Moderate</string>
+    <string name="expensive">Expensive</string>
+    <string name="very_expensive">Very Expensive</string>
+    <string name="in">in</string>
 </resources>

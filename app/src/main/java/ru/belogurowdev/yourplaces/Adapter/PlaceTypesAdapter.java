@@ -20,6 +20,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ru.belogurowdev.yourplaces.Activity.PlacesListActivity;
 import ru.belogurowdev.yourplaces.Model.PlaceType;
 import ru.belogurowdev.yourplaces.R;
@@ -44,19 +45,16 @@ public class PlaceTypesAdapter extends RecyclerView.Adapter<PlaceTypesAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+
         @BindView(R.id.textView_card_type) TextView mTextViewType;
         @BindView(R.id.imageView_card_background) ImageView mImageViewBackground;
         @BindView(R.id.card_place_type) CardView mCardView;
-
-
-        public static final int DEFAULT_COLOR = 0x000000;
-
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
-    }
 
+    }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
@@ -73,6 +71,7 @@ public class PlaceTypesAdapter extends RecyclerView.Adapter<PlaceTypesAdapter.Vi
         Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), placeType.getBackgroundImage());
         holder.mImageViewBackground.setImageBitmap(bitmap);
 
+
         if (bitmap != null && !bitmap.isRecycled()) {
             Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
                 @Override
@@ -83,7 +82,6 @@ public class PlaceTypesAdapter extends RecyclerView.Adapter<PlaceTypesAdapter.Vi
                 }
             });
         }
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

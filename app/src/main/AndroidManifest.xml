@@ -39,7 +39,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activity.PlaceTypesActivity"/>
         </activity>
-
         <activity android:name=".Activity.AboutAppActivity">
         </activity>
 
@@ -47,6 +46,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCgmDGf_F2chAKZP25MLacyp5EvudbZzuI"/>
 
+        <activity android:name=".Activity.PlaceHistoryActivity">
+        </activity>
     </application>
 
 </manifest>

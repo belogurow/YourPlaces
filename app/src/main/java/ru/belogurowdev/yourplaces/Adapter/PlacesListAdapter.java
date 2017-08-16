@@ -2,25 +2,16 @@ package ru.belogurowdev.yourplaces.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.TransitionDrawable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 
 import java.util.List;
 
@@ -49,10 +40,13 @@ public class PlacesListAdapter extends RecyclerView.Adapter<PlacesListAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.card_place_info) CardView mCardView;
-        @BindView(R.id.imageView_card_place_info_photo) ImageView mImageViewPlacePhoto;
-        @BindView(R.id.textView_card_place_info_name) TextView mTextViewPlaceName;
-        @BindView(R.id.textView_card_place_info_address) TextView mTextViewPlaceAddress;
-        @BindView(R.id.progressBar_card_place_image) ProgressBar mProgressBar;
+        @BindView(R.id.image_card_place_info_photo) ImageView mImageViewPlacePhoto;
+        @BindView(R.id.text_card_place_info_name) TextView mTextViewPlaceName;
+        @BindView(R.id.text_card_place_info_address) TextView mTextViewPlaceAddress;
+        @BindView(R.id.rating_card_place_info) RatingBar mRatingBar;
+        @BindView(R.id.text_card_place_info_rating) TextView mTextViewRating;
+        @BindView(R.id.progress_card_place_image) ProgressBar mProgressBar;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -63,7 +57,7 @@ public class PlacesListAdapter extends RecyclerView.Adapter<PlacesListAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_place_info, parent, false);
+                .inflate(R.layout.item_place_info, parent, false);
         return new ViewHolder(itemView);
     }
 
@@ -73,8 +67,15 @@ public class PlacesListAdapter extends RecyclerView.Adapter<PlacesListAdapter.Vi
 
         holder.mTextViewPlaceName.setText(place.getName());
         holder.mTextViewPlaceAddress.setText(place.getFormattedAddress());
+        if (place.getRating() != null) {
+            holder.mTextViewRating.setText(place.getRating().toString());
+            holder.mTextViewRating.setTextColor(mContext.getResources().getColor(R.color.accent_material_light));
+            holder.mRatingBar.setRating(place.getRating().floatValue());
+        }
 
         // Load place image if it exists
+        // TODO убрать комментарий
+        /*
         if (place.getPhotos() != null) {
             int maxWidth = holder.mImageViewPlacePhoto.getMaxWidth();
             final String url = "https://maps.googleapis.com/maps/api/place/photo?"
@@ -104,6 +105,7 @@ public class PlacesListAdapter extends RecyclerView.Adapter<PlacesListAdapter.Vi
             holder.mProgressBar.setVisibility(View.GONE);
             holder.mImageViewPlacePhoto.setImageResource(R.drawable.no_image);
         }
+        */
 
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
