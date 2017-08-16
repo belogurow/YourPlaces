@@ -40,8 +40,7 @@ import ru.belogurowdev.yourplaces.R;
 public class PlacesListAdapter extends RecyclerView.Adapter<PlacesListAdapter.ViewHolder> {
 
     private static final String TAG = PlacesListActivity.class.getSimpleName();
-    private final static String API_KEY = "AIzaSyAI-JOPMs5Yr-NhfbEnf_pNO9jA2bcOCkc";
-                            //android - "AIzaSyAuJIEnY4TcR-G67YJSgS2CNbPJNABzs3s";
+    private final static String API_KEY = "AIzaSyAuJIEnY4TcR-G67YJSgS2CNbPJNABzs3s";
     private static final String EXTRA_PLACE_ID = "ru.belogurowdev.extras.PLACE_ID";
     private static final String EXTRA_PLACE_PHOTO_REF = "ru.belogurowdev.extras.PLACE_PHOTO_REF";
     private RequestOptions mRequestOptions;

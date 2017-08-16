@@ -33,8 +33,7 @@ import ru.belogurowdev.yourplaces.R;
  */
 public class PlacesListActivity extends AppCompatActivity {
 
-    private final static String API_KEY = "AIzaSyAI-JOPMs5Yr-NhfbEnf_pNO9jA2bcOCkc";
-            // android - "AIzaSyAuJIEnY4TcR-G67YJSgS2CNbPJNABzs3s";
+    private final static String API_KEY = "AIzaSyAuJIEnY4TcR-G67YJSgS2CNbPJNABzs3s";
     private final static String STATUS_OK = "OK";
 
     private GooglePlacesList mGooglePlacesList;

@@ -61,8 +61,7 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnConnection
     private static final String TAG = PlaceInfoActivity.class.getSimpleName();
     private static final String EXTRA_PLACE_ID = "ru.belogurowdev.extras.PLACE_ID";
     private static final String EXTRA_PLACE_PHOTO_REF = "ru.belogurowdev.extras.PLACE_PHOTO_REF";
-    private final static String API_KEY = "AIzaSyAI-JOPMs5Yr-NhfbEnf_pNO9jA2bcOCkc";
-            //android - "AIzaSyAuJIEnY4TcR-G67YJSgS2CNbPJNABzs3s";
+    private final static String API_KEY = "AIzaSyAuJIEnY4TcR-G67YJSgS2CNbPJNABzs3s";
     private final static String STATUS_OK = "OK";
 
     @BindView(R.id.toolbar_place_info) Toolbar mToolbar;
