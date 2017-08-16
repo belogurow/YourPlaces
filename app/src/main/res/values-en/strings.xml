@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">YourPlaces</string>
+    <string name="nav_search">Search</string>
+    <string name="nav_history">History</string>
+    <string name="nav_favourites">Favourites</string>
+    <string name="nav_openSource">Open Source</string>
+    <string name="nav_contact">Contact me</string>
+    <string name="pick_on_the_map">Pick on the Map</string>
+    <string name="more">MORE</string>
+    <string name="Usa">Usa</string>
+    <string name="Italy">Italy</string>
+    <string name="France">France</string>
+    <string name="Russia">Russia</string>
+    <string name="choose_type">Choose type</string>
+    <string name="bar">Bar</string>
+    <string name="hospital">Hospital</string>
+    <string name="library">Library</string>
+    <string name="hotel">Hotel</string>
+    <string name="parking">Parking</string>
+    <string name="cinema">Cinema</string>
+    <string name="bank">Bank</string>
+    <string name="cafe">Cafe</string>
+    <string name="airport">Airport</string>
+    <string name="mall">Mall</string>
+    <string name="choose_place">Choose place</string>
+    <string name="countries_for_tourism">Countries for tourism</string>
+    <string name="about">About App</string>
+    <string name="free">Free</string>
+    <string name="inexpensive">Inexpensive</string>
+    <string name="moderate">Moderate</string>
+    <string name="expensive">Expensive</string>
+    <string name="very_expensive">Very Expensive</string>
+    <string name="in">in</string>
+    <string name="Malaysia">Malaysia</string>
+    <string name="UK">UK</string>
+    <string name="Germany">Germany</string>
+    <string name="Turkey">Turkey</string>
+    <string name="Spain">Spain</string>
+    <string name="China">China</string>
+    <string name="about_app_description">YourPlaces allows you to find any place of interest         around the world. With Google Places Api app has access to a huge number of places and         their description.</string>
+    <string name="about_app_developed">Application created by <a href="http://belogurowdev.ru/">Belogurow Alexey</a>     "</string>
+</resources>

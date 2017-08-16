@@ -8,4 +8,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="LightCustomTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:colorBackground">@color/background_material_light</item>
+    </style>
+
+    <style name="AppBarCustomTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:colorForeground">@color/foreground_material_dark</item>
+        <item name="android:textColorSecondary">@color/secondary_text_material_dark</item>
+    </style>
+
+
 </resources>

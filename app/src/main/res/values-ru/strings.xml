@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">YourPlaces</string>
+    <string name="nav_search">Поиск</string>
+    <string name="nav_history">История</string>
+    <string name="nav_favourites">Избранное</string>
+    <string name="pick_on_the_map">Выбрать место на карте</string>
+    <string name="nav_contact">Свяжитесь со мной</string>
+    <string name="nav_openSource">Открытый исходный код</string>
+    <string name="more">БОЛЬШЕ</string>
+    <string name="Usa">США</string>
+    <string name="Italy">Италия</string>
+    <string name="France">Франция</string>
+    <string name="Russia">Россия</string>
+    <string name="choose_type">Выберите тип</string>
+    <string name="bar">Бар</string>
+    <string name="hospital">Госпиталь</string>
+    <string name="library">Библиотека</string>
+    <string name="hotel">Гостиница</string>
+    <string name="parking">Парковка</string>
+    <string name="cinema">Кинотеатр</string>
+    <string name="bank">Банк</string>
+    <string name="cafe">Кафе</string>
+    <string name="airport">Аэропорт</string>
+    <string name="mall">Торговый центр</string>
+    <string name="choose_place">Выберите место</string>
+    <string name="countries_for_tourism">Страны для туризма</string>
+    <string name="about">Информация о приложении</string>
+    <string name="free">Бесплатное</string>
+    <string name="inexpensive">Недорогое</string>
+    <string name="expensive">Дорогое</string>
+    <string name="very_expensive">Очень дорогое</string>
+    <string name="in">в</string>
+    <string name="Malaysia">Малайзия</string>
+    <string name="UK">Англия</string>
+    <string name="Germany">Германия</string>
+    <string name="Turkey">Турция</string>
+    <string name="Spain">Испания</string>
+    <string name="China">Китай</string>
+    <string name="about_app_description">YourPlaces позволяет находить любые интересные места по всему миру. С помощью Google Places Api приложение имеет доступ к огромному количеству мест и их описанию.</string>
+    <string name="about_app_developed">" Разработчик приложения <a href="http://belogurowdev.ru/">Белогуров Алексей</a>     "</string>
+</resources>
