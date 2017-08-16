@@ -1,5 +1,5 @@
 
-package ru.belogurowdev.yourplaces.Api.GooglePlacesModel;
+package ru.belogurowdev.yourplaces.Api.GooglePlaceID;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -1,10 +1,10 @@
 
-package ru.belogurowdev.yourplaces.Api.GooglePlacesModel;
+package ru.belogurowdev.yourplaces.Api.GooglePlacesList;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Location {
+public class Southwest {
 
     @SerializedName("lat")
     @Expose

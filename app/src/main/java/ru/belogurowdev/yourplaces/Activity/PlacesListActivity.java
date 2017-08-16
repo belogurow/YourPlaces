@@ -1,8 +1,5 @@
 package ru.belogurowdev.yourplaces.Activity;
 
-import android.content.Context;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -26,8 +24,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import ru.belogurowdev.yourplaces.Adapter.PlacesListAdapter;
 import ru.belogurowdev.yourplaces.Api.ControllerPlacesApi;
-import ru.belogurowdev.yourplaces.Api.GooglePlacesModel.GooglePlace;
-import ru.belogurowdev.yourplaces.Api.GooglePlacesModel.Result;
+import ru.belogurowdev.yourplaces.Api.GooglePlacesList.GooglePlacesList;
+import ru.belogurowdev.yourplaces.Api.GooglePlacesList.Result;
 import ru.belogurowdev.yourplaces.R;
 
 /**
@@ -35,10 +33,11 @@ import ru.belogurowdev.yourplaces.R;
  */
 public class PlacesListActivity extends AppCompatActivity {
 
-    private final static String API_KEY = "AIzaSyAuJIEnY4TcR-G67YJSgS2CNbPJNABzs3s";
+    private final static String API_KEY = "AIzaSyAI-JOPMs5Yr-NhfbEnf_pNO9jA2bcOCkc";
+            // android - "AIzaSyAuJIEnY4TcR-G67YJSgS2CNbPJNABzs3s";
     private final static String STATUS_OK = "OK";
 
-    private GooglePlace mGooglePlace;
+    private GooglePlacesList mGooglePlacesList;
     private List<Result> mPlacesList;
     private PlacesListAdapter mPlaceListAdapter;
 
@@ -104,16 +103,15 @@ public class PlacesListActivity extends AppCompatActivity {
         }
 
         ControllerPlacesApi placesApi = new ControllerPlacesApi();
-        //String type = getLocaleStringResource(new Locale("en"), ty)
-        placesApi.getGooglePlacesApi().getPlaces(type + " в " + country, API_KEY, currentLocale.getLanguage()).enqueue(new Callback<GooglePlace>() {
+        placesApi.getGooglePlacesApi().getPlaces(type + " в " + country, API_KEY, currentLocale.getLanguage()).enqueue(new Callback<GooglePlacesList>() {
             @Override
-            public void onResponse(@NonNull Call<GooglePlace> call, @NonNull Response<GooglePlace> response) {
+            public void onResponse(@NonNull Call<GooglePlacesList> call, @NonNull Response<GooglePlacesList> response) {
                 mProgressBar.setVisibility(View.GONE);
 
                 if (response.body().getStatus().equals(STATUS_OK)) {
-                    mGooglePlace = response.body();
+                    mGooglePlacesList = response.body();
                     Log.d("places-url", call.request().url().toString());
-                    mPlacesList.addAll(mGooglePlace.getResults());
+                    mPlacesList.addAll(mGooglePlacesList.getResults());
                     mPlaceListAdapter.notifyDataSetChanged();
                 } else {
                     errorToast(response.body().getStatus());
@@ -121,7 +119,7 @@ public class PlacesListActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<GooglePlace> call, Throwable t) {
+            public void onFailure(Call<GooglePlacesList> call, Throwable t) {
                 errorToast(null);
             }
         });
@@ -139,32 +137,19 @@ public class PlacesListActivity extends AppCompatActivity {
             errorMessage = "Error with status - " + status;
         }
 
-        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
     }
 
-    public static String getLocaleStringResource(Locale requestedLocale, int resourceId, Context context) {
-        String result;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) { // use latest api
-            Configuration config = new Configuration(context.getResources().getConfiguration());
-            config.setLocale(requestedLocale);
-            result = context.createConfigurationContext(config).getText(resourceId).toString();
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Finish activity when press back button
+            case android.R.id.home:
+                finish();
+                return true;
         }
-        else { // support older android versions
-            Resources resources = context.getResources();
-            Configuration conf = resources.getConfiguration();
-            Locale savedLocale = conf.locale;
-            conf.locale = requestedLocale;
-            resources.updateConfiguration(conf, null);
-
-            // retrieve resources from desired locale
-            result = resources.getString(resourceId);
-
-            // restore original locale
-            conf.locale = savedLocale;
-            resources.updateConfiguration(conf, null);
-        }
-
-        return result;
+        return super.onOptionsItemSelected(item);
     }
 }
 

@@ -1,5 +1,5 @@
 
-package ru.belogurowdev.yourplaces.Api.GooglePlacesModel;
+package ru.belogurowdev.yourplaces.Api.GooglePlacesList;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
