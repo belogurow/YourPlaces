@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">YourPlaces</string>
     <string name="nav_search">Поиск</string>
     <string name="nav_history">История</string>
     <string name="nav_favourites">Избранное</string>
@@ -39,4 +38,5 @@
     <string name="China">Китай</string>
     <string name="about_app_description">YourPlaces позволяет находить любые интересные места по всему миру. С помощью Google Places Api приложение имеет доступ к огромному количеству мест и их описанию.</string>
     <string name="about_app_developed">" Разработчик приложения <a href="http://belogurowdev.ru/">Белогуров Алексей</a>     "</string>
+    <string name="moderate">Умеренное</string>
 </resources>

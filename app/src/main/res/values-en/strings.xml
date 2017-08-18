@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">YourPlaces</string>
     <string name="nav_search">Search</string>
     <string name="nav_history">History</string>
     <string name="nav_favourites">Favourites</string>
