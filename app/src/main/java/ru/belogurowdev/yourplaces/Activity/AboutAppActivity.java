@@ -21,7 +21,7 @@ import ru.belogurowdev.yourplaces.R;
 public class AboutAppActivity extends AppCompatActivity {
 
     private final static int CURRENT_POSITION = 3;
-    
+
 
     private List<AndroidLibrary> mLibraries;
     private AndroidLibraryAdapter mAdapter;

@@ -28,6 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.Realm;
+import io.realm.exceptions.RealmException;
 import ru.belogurowdev.yourplaces.Adapter.RecommendAdapter;
 import ru.belogurowdev.yourplaces.Model.Recommendation;
 import ru.belogurowdev.yourplaces.NavigationDrawer.NavDrawer;
@@ -54,7 +55,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        Realm.init(this);
+        try {
+            Realm.init(this);
+        } catch (RealmException e) {
+            Toast.makeText(this, "Realm init error", Toast.LENGTH_SHORT).show();
+        }
 
         setToolbar();
         setPlaceSearchFrag();
