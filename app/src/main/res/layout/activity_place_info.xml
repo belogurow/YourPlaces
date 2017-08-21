@@ -48,7 +48,7 @@
             android:id="@+id/constraint_place_info"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context="ru.belogurowdev.yourplaces.Activity.PlaceInfoActivity">
+            tools:context="ru.belogurowdev.yourplaces.activities.PlaceInfoActivity">
 
 
             <ProgressBar

@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/LightCustomTheme">
         <activity
-            android:name=".Activity.MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -21,32 +21,32 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.PlaceInfoActivity">
+        <activity android:name=".activities.PlaceInfoActivity">
         </activity>
         <activity
-            android:name=".Activity.PlaceTypesActivity"
+            android:name=".activities.PlaceTypesActivity"
             android:label="@string/choose_type"
-            android:parentActivityName=".Activity.MainActivity">
+            android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activity.MainActivity"/>
+                android:value=".activities.MainActivity"/>
         </activity>
         <activity
-            android:name=".Activity.PlacesListActivity"
+            android:name=".activities.PlacesListActivity"
             android:label="@string/choose_place"
-            android:parentActivityName=".Activity.PlaceTypesActivity">
+            android:parentActivityName=".activities.PlaceTypesActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activity.PlaceTypesActivity"/>
+                android:value=".activities.PlaceTypesActivity"/>
         </activity>
-        <activity android:name=".Activity.AboutAppActivity">
+        <activity android:name=".activities.AboutAppActivity">
         </activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCgmDGf_F2chAKZP25MLacyp5EvudbZzuI"/>
 
-        <activity android:name=".Activity.PlaceHistoryActivity">
+        <activity android:name=".activities.PlaceHistoryActivity">
         </activity>
     </application>
 
