@@ -39,4 +39,6 @@
     <string name="China">China</string>
     <string name="about_app_description">YourPlaces allows you to find any place of interest         around the world. With Google Places Api app has access to a huge number of places and         their description.</string>
     <string name="about_app_developed">Application created by <a href="http://belogurowdev.ru/">Belogurow Alexey</a>     "</string>
+    <string name="restaurant">Restaurant</string>
+    <string name="museum">Museum</string>
 </resources>

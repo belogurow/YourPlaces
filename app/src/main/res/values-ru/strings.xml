@@ -39,4 +39,6 @@
     <string name="about_app_description">YourPlaces позволяет находить любые интересные места по всему миру. С помощью Google Places Api приложение имеет доступ к огромному количеству мест и их описанию.</string>
     <string name="about_app_developed">" Разработчик приложения <a href="http://belogurowdev.ru/">Белогуров Алексей</a>     "</string>
     <string name="moderate">Умеренное</string>
+    <string name="restaurant">Ресторан</string>
+    <string name="museum">Музей</string>
 </resources>

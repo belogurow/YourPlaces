@@ -5,7 +5,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 import ru.belogurowdev.yourplaces.Api.GooglePlaceID.GooglePlaceId;
 import ru.belogurowdev.yourplaces.Api.GooglePlacesList.GooglePlacesList;
-import ru.belogurowdev.yourplaces.Api.GooglePlacesList.Result;
 
 /**
  * Created by alexbelogurow on 10.08.17.
