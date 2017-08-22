@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.textView_main_map) TextView mTextViewMap;
     @BindView(R.id.imageView_main_pin) ImageView mImageViewPin;
     @BindView(R.id.imageView_main_map) ImageView mImageViewMap;
-
     @BindView(R.id.include1) View include1;
 
     @Override
