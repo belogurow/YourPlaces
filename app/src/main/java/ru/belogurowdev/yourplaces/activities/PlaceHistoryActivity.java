@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.squareup.leakcanary.RefWatcher;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.Realm;
@@ -19,6 +21,7 @@ import ru.belogurowdev.yourplaces.adapters.PlacesHistoryAdapter;
 import ru.belogurowdev.yourplaces.models.PlaceRealm;
 import ru.belogurowdev.yourplaces.NavDrawer;
 import ru.belogurowdev.yourplaces.R;
+import ru.belogurowdev.yourplaces.utils.App;
 
 public class PlaceHistoryActivity extends AppCompatActivity {
 
@@ -86,5 +89,9 @@ public class PlaceHistoryActivity extends AppCompatActivity {
             mRealm.close();
         }
         super.onDestroy();
+
+        RefWatcher refWatcher = App.getRefWatcher(this);
+        refWatcher.watch(this);
     }
+
 }

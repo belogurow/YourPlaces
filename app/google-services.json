@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "696013011545",
+    "firebase_url": "https://yourplaces-4aa73.firebaseio.com",
+    "project_id": "yourplaces-4aa73",
+    "storage_bucket": "yourplaces-4aa73.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:696013011545:android:30aa80ffacc00bbc",
+        "android_client_info": {
+          "package_name": "ru.belogurowdev.yourplaces"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "696013011545-mgv1iuobic4rq6jh2b52o99ro6dq3sjm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.belogurowdev.yourplaces",
+            "certificate_hash": "859c2e1fb14e8d365ae7662c5ff06158fe2ad339"
+          }
+        },
+        {
+          "client_id": "696013011545-aakf4roc3bn62ttkbsuuv6t5c20plakb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWd5tfCXZ476WbMEY3Azh-1VJsFLG4njY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "696013011545-aakf4roc3bn62ttkbsuuv6t5c20plakb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

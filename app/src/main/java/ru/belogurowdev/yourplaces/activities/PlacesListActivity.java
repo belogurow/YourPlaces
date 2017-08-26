@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.squareup.leakcanary.RefWatcher;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -27,6 +29,7 @@ import ru.belogurowdev.yourplaces.Api.ControllerPlacesApi;
 import ru.belogurowdev.yourplaces.Api.GooglePlacesList.GooglePlacesList;
 import ru.belogurowdev.yourplaces.Api.GooglePlacesList.Result;
 import ru.belogurowdev.yourplaces.R;
+import ru.belogurowdev.yourplaces.utils.App;
 
 /**
  * Show list of places
@@ -149,6 +152,13 @@ public class PlacesListActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = App.getRefWatcher(this);
+        refWatcher.watch(this);
     }
 }
 

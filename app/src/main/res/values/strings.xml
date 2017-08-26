@@ -30,7 +30,7 @@
 
 
     <!-- PlaceTypesActivity -->
-    <string name="choose_type">Choose type</string>
+    <string name="choose_type">Choose nameType</string>
     <string name="bar">Bar</string>
     <string name="hospital">Hospital</string>
     <string name="library">Library</string>
