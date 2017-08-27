@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -42,9 +44,10 @@ public class PlaceTypesAdapter extends RecyclerView.Adapter<PlaceTypesAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.textView_card_type) TextView mTextViewType;
-        @BindView(R.id.imageView_card_background) ImageView mImageViewBackground;
+        @BindView(R.id.text_place_type) TextView mTextViewType;
+        @BindView(R.id.image_place_type) ImageView mImageViewType;
         @BindView(R.id.card_place_type) CardView mCardView;
+
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -54,7 +57,7 @@ public class PlaceTypesAdapter extends RecyclerView.Adapter<PlaceTypesAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_place_type, parent, false);
+                .inflate(R.layout.item_place_type, parent, false);
         return new ViewHolder(itemView);
     }
 
@@ -62,11 +65,12 @@ public class PlaceTypesAdapter extends RecyclerView.Adapter<PlaceTypesAdapter.Vi
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final PlaceType placeType = mPlaceTypes.get(position);
 
-        holder.mTextViewType.setText(placeType.getType());
+        holder.mTextViewType.setText(placeType.getNameType());
+        Glide.with(mContext)
+                .load(placeType.getImageType())
+                .into(holder.mImageViewType);
 
-        Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), placeType.getBackgroundImage());
-        holder.mImageViewBackground.setImageBitmap(bitmap);
-
+        Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), placeType.getImageType());
 
         if (bitmap != null && !bitmap.isRecycled()) {
             Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
@@ -84,7 +88,7 @@ public class PlaceTypesAdapter extends RecyclerView.Adapter<PlaceTypesAdapter.Vi
             public void onClick(View view) {
                 Intent placesListIntent = new Intent(mContext, PlacesListActivity.class);
                 placesListIntent.putExtra("COUNTRY", country);
-                placesListIntent.putExtra("TYPE", placeType.getType());
+                placesListIntent.putExtra("TYPE", placeType.getNameType());
                 mContext.startActivity(placesListIntent);
             }
         });

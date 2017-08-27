@@ -5,28 +5,28 @@ package ru.belogurowdev.yourplaces.models;
  */
 
 public class PlaceType {
-    private String type;
-    private int backgroundImage;
+    private String mNameType;
+    private int mImageType;
 
-    public PlaceType(String type, int backgroundImage) {
-        this.type = type;
-        this.backgroundImage = backgroundImage;
+    public PlaceType(String mNameType, int mImageType) {
+        this.mNameType = mNameType;
+        this.mImageType = mImageType;
     }
 
 
-    public String getType() {
-        return type;
+    public String getNameType() {
+        return mNameType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setNameType(String nameType) {
+        this.mNameType = nameType;
     }
 
-    public int getBackgroundImage() {
-        return backgroundImage;
+    public int getImageType() {
+        return mImageType;
     }
 
-    public void setBackgroundImage(int backgroundImage) {
-        this.backgroundImage = backgroundImage;
+    public void setImageType(int imageType) {
+        this.mImageType = imageType;
     }
 }

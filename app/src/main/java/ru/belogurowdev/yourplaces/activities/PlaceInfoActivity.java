@@ -30,8 +30,10 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
+import com.squareup.leakcanary.RefWatcher;
 
 
 import java.util.ArrayList;
@@ -52,6 +54,8 @@ import ru.belogurowdev.yourplaces.Api.GooglePlaceID.GooglePlaceId;
 import ru.belogurowdev.yourplaces.Api.GooglePlaceID.Result;
 import ru.belogurowdev.yourplaces.models.PlaceRealm;
 import ru.belogurowdev.yourplaces.R;
+import ru.belogurowdev.yourplaces.utils.App;
+import ru.belogurowdev.yourplaces.utils.FBAnalytics;
 
 /**
  * Show place mInfoList
@@ -306,6 +310,7 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnConnection
 
         mProgressBar.setVisibility(View.GONE);
         saveToRealm();
+        saveAnalytics();
         mAdapter.notifyDataSetChanged();
     }
 
@@ -336,6 +341,16 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnConnection
                 realm.close();
             }
         }
+    }
+
+    private void saveAnalytics() {
+        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, mCurrentPlace.getPlaceId());
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, mCurrentPlace.getName());
+        bundle.putString(FirebaseAnalytics.Param.ITEM_LOCATION_ID, mCurrentPlace.getFormattedAddress());
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
     }
 
     @Override
@@ -373,4 +388,12 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnConnection
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = App.getRefWatcher(this);
+        refWatcher.watch(this);
+    }
+
 }

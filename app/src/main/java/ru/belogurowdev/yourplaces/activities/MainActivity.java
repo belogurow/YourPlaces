@@ -21,8 +21,10 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
+import com.squareup.leakcanary.RefWatcher;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,6 +35,7 @@ import ru.belogurowdev.yourplaces.adapters.RecommendAdapter;
 import ru.belogurowdev.yourplaces.models.Recommendation;
 import ru.belogurowdev.yourplaces.NavDrawer;
 import ru.belogurowdev.yourplaces.R;
+import ru.belogurowdev.yourplaces.utils.App;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.textView_main_map) TextView mTextViewMap;
     @BindView(R.id.imageView_main_pin) ImageView mImageViewPin;
     @BindView(R.id.imageView_main_map) ImageView mImageViewMap;
-
     @BindView(R.id.include1) View include1;
 
     @Override
@@ -55,11 +57,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        try {
-            Realm.init(this);
-        } catch (RealmException e) {
-            Toast.makeText(this, "Realm init error", Toast.LENGTH_SHORT).show();
-        }
+
 
         setToolbar();
         setPlaceSearchFrag();
@@ -185,5 +183,12 @@ public class MainActivity extends AppCompatActivity {
         Intent placeInfo = new Intent(this, PlaceInfoActivity.class);
         placeInfo.putExtra(EXTRA_PLACE_ID, placeId);
         startActivity(placeInfo);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = App.getRefWatcher(this);
+        refWatcher.watch(this);
     }
 }
