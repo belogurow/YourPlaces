@@ -3,8 +3,8 @@ package ru.belogurowdev.yourplaces.activities;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -21,7 +20,6 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
 import com.squareup.leakcanary.RefWatcher;
@@ -29,13 +27,11 @@ import com.squareup.leakcanary.RefWatcher;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.realm.Realm;
-import io.realm.exceptions.RealmException;
-import ru.belogurowdev.yourplaces.adapters.RecommendAdapter;
-import ru.belogurowdev.yourplaces.models.Recommendation;
 import ru.belogurowdev.yourplaces.NavDrawer;
 import ru.belogurowdev.yourplaces.R;
-import ru.belogurowdev.yourplaces.utils.App;
+import ru.belogurowdev.yourplaces.adapters.RecommendAdapter;
+import ru.belogurowdev.yourplaces.models.Recommendation;
+import ru.belogurowdev.yourplaces.util.App;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -188,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        RefWatcher refWatcher = App.getRefWatcher(this);
+        RefWatcher refWatcher = App.Companion.getRefWatcher(this);
         refWatcher.watch(this);
     }
 }

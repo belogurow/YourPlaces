@@ -1,9 +1,9 @@
 package ru.belogurowdev.yourplaces.activities;
 
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -24,12 +24,12 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import ru.belogurowdev.yourplaces.adapters.PlacesListAdapter;
-import ru.belogurowdev.yourplaces.Api.ControllerPlacesApi;
-import ru.belogurowdev.yourplaces.Api.GooglePlacesList.GooglePlacesList;
-import ru.belogurowdev.yourplaces.Api.GooglePlacesList.Result;
 import ru.belogurowdev.yourplaces.R;
-import ru.belogurowdev.yourplaces.utils.App;
+import ru.belogurowdev.yourplaces.adapters.PlacesListAdapter;
+import ru.belogurowdev.yourplaces.data.api.ControllerPlacesApi;
+import ru.belogurowdev.yourplaces.data.model.place.PlacesListResponse;
+import ru.belogurowdev.yourplaces.data.model.place.Result;
+import ru.belogurowdev.yourplaces.util.App;
 
 /**
  * Show list of places
@@ -39,7 +39,7 @@ public class PlacesListActivity extends AppCompatActivity {
     private final static String API_KEY = "AIzaSyAuJIEnY4TcR-G67YJSgS2CNbPJNABzs3s";
     private final static String STATUS_OK = "OK";
 
-    private GooglePlacesList mGooglePlacesList;
+    private PlacesListResponse mPlacesListResponse;
     private List<Result> mPlacesList;
     private PlacesListAdapter mPlaceListAdapter;
 
@@ -105,15 +105,15 @@ public class PlacesListActivity extends AppCompatActivity {
         }
 
         ControllerPlacesApi placesApi = new ControllerPlacesApi();
-        placesApi.getGooglePlacesApi().getPlaces(type + " в " + country, API_KEY, currentLocale.getLanguage()).enqueue(new Callback<GooglePlacesList>() {
+        placesApi.getGooglePlacesApi().getPlaces(type + " в " + country, API_KEY, currentLocale.getLanguage()).enqueue(new Callback<PlacesListResponse>() {
             @Override
-            public void onResponse(@NonNull Call<GooglePlacesList> call, @NonNull Response<GooglePlacesList> response) {
+            public void onResponse(@NonNull Call<PlacesListResponse> call, @NonNull Response<PlacesListResponse> response) {
                 mProgressBar.setVisibility(View.GONE);
 
                 if (response.body().getStatus().equals(STATUS_OK)) {
-                    mGooglePlacesList = response.body();
+                    mPlacesListResponse = response.body();
                     Log.d("places-url", call.request().url().toString());
-                    mPlacesList.addAll(mGooglePlacesList.getResults());
+                    mPlacesList.addAll(mPlacesListResponse.getResults());
                     mPlaceListAdapter.notifyDataSetChanged();
                 } else {
                     errorToast(response.body().getStatus());
@@ -121,7 +121,7 @@ public class PlacesListActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<GooglePlacesList> call, Throwable t) {
+            public void onFailure(Call<PlacesListResponse> call, Throwable t) {
                 errorToast(null);
             }
         });
@@ -157,7 +157,7 @@ public class PlacesListActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        RefWatcher refWatcher = App.getRefWatcher(this);
+        RefWatcher refWatcher = App.Companion.getRefWatcher(this);
         refWatcher.watch(this);
     }
 }

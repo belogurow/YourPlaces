@@ -5,11 +5,11 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -35,11 +35,10 @@ import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
 import com.squareup.leakcanary.RefWatcher;
 
-
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,14 +47,13 @@ import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import ru.belogurowdev.yourplaces.adapters.PlaceInfoAdapter;
-import ru.belogurowdev.yourplaces.Api.ControllerPlacesApi;
-import ru.belogurowdev.yourplaces.Api.GooglePlaceID.GooglePlaceId;
-import ru.belogurowdev.yourplaces.Api.GooglePlaceID.Result;
-import ru.belogurowdev.yourplaces.models.PlaceRealm;
 import ru.belogurowdev.yourplaces.R;
-import ru.belogurowdev.yourplaces.utils.App;
-import ru.belogurowdev.yourplaces.utils.FBAnalytics;
+import ru.belogurowdev.yourplaces.adapters.PlaceInfoAdapter;
+import ru.belogurowdev.yourplaces.data.api.ControllerPlacesApi;
+import ru.belogurowdev.yourplaces.data.model.GooglePlaceID.Result;
+import ru.belogurowdev.yourplaces.data.model.place.PlaceResponse;
+import ru.belogurowdev.yourplaces.models.PlaceRealm;
+import ru.belogurowdev.yourplaces.util.App;
 
 /**
  * Show place mInfoList
@@ -124,9 +122,9 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnConnection
 
         ControllerPlacesApi placesApi = new ControllerPlacesApi();
 
-        placesApi.getGooglePlacesApi().getPlaceById(mPlaceId, API_KEY, currentLocale.getLanguage()).enqueue(new Callback<GooglePlaceId>() {
+        placesApi.getGooglePlacesApi().getPlaceById(mPlaceId, API_KEY, currentLocale.getLanguage()).enqueue(new Callback<PlaceResponse>() {
             @Override
-            public void onResponse(Call<GooglePlaceId> call, Response<GooglePlaceId> response) {
+            public void onResponse(Call<PlaceResponse> call, Response<PlaceResponse> response) {
                 mProgressBar.setVisibility(View.GONE);
 
                 if (response.body().getStatus().equals(STATUS_OK)) {
@@ -139,7 +137,7 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnConnection
             }
 
             @Override
-            public void onFailure(Call<GooglePlaceId> call, Throwable t) {
+            public void onFailure(Call<PlaceResponse> call, Throwable t) {
                 errorToast("Cannot load data");
             }
         });
@@ -392,7 +390,7 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnConnection
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        RefWatcher refWatcher = App.getRefWatcher(this);
+        RefWatcher refWatcher = App.Companion.getRefWatcher(this);
         refWatcher.watch(this);
     }
 

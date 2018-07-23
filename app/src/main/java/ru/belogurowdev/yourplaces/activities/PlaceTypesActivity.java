@@ -1,16 +1,14 @@
 package ru.belogurowdev.yourplaces.activities;
 
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.LayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.squareup.leakcanary.RefWatcher;
 
@@ -19,10 +17,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ru.belogurowdev.yourplaces.R;
 import ru.belogurowdev.yourplaces.adapters.PlaceTypesAdapter;
 import ru.belogurowdev.yourplaces.models.PlaceType;
-import ru.belogurowdev.yourplaces.R;
-import ru.belogurowdev.yourplaces.utils.App;
+import ru.belogurowdev.yourplaces.util.App;
 
 /**
  * choose type of place
@@ -130,7 +128,7 @@ public class PlaceTypesActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        RefWatcher refWatcher = App.getRefWatcher(this);
+        RefWatcher refWatcher = App.Companion.getRefWatcher(this);
         refWatcher.watch(this);
     }
 }

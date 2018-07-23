@@ -1,9 +1,9 @@
 package ru.belogurowdev.yourplaces.activities;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -12,7 +12,7 @@ import com.squareup.leakcanary.RefWatcher;
 import io.realm.Realm;
 import io.realm.exceptions.RealmException;
 import ru.belogurowdev.yourplaces.R;
-import ru.belogurowdev.yourplaces.utils.App;
+import ru.belogurowdev.yourplaces.util.App;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -42,7 +42,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        RefWatcher refWatcher = App.getRefWatcher(this);
+        RefWatcher refWatcher = App.Companion.getRefWatcher(this);
         refWatcher.watch(this);
     }
 }

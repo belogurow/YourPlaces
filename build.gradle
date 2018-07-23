@@ -34,7 +34,9 @@ task clean(type: Delete) {
 
 ext {
 //    kotlin_version = '1.2.51'
+    coroutines_version = '0.23.4'
     arch_version = '1.1.1'
+    dagger_version = '2.5'
     support_version = '27.1.1'
     constraint_version = '1.1.2'
     gms_places_version = '15.0.1'
@@ -42,6 +44,8 @@ ext {
     firebase_version = '16.0.1'
     butter_knife_version = '8.8.1'
     retrofit_version = '2.4.0'
+    retrofit_coroutines_version = '1.0.0'
+    okhttp_version = '3.8.1'
     navigation_drawer_version = '6.0.9@aar'
     glide_version = '4.7.1'
     leak_canary_version = '1.6.1'

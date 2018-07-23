@@ -1,7 +1,7 @@
 package ru.belogurowdev.yourplaces.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -17,11 +17,11 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 import io.realm.Sort;
 import io.realm.exceptions.RealmException;
-import ru.belogurowdev.yourplaces.adapters.PlacesHistoryAdapter;
-import ru.belogurowdev.yourplaces.models.PlaceRealm;
 import ru.belogurowdev.yourplaces.NavDrawer;
 import ru.belogurowdev.yourplaces.R;
-import ru.belogurowdev.yourplaces.utils.App;
+import ru.belogurowdev.yourplaces.adapters.PlacesHistoryAdapter;
+import ru.belogurowdev.yourplaces.models.PlaceRealm;
+import ru.belogurowdev.yourplaces.util.App;
 
 public class PlaceHistoryActivity extends AppCompatActivity {
 
@@ -90,7 +90,7 @@ public class PlaceHistoryActivity extends AppCompatActivity {
         }
         super.onDestroy();
 
-        RefWatcher refWatcher = App.getRefWatcher(this);
+        RefWatcher refWatcher = App.Companion.getRefWatcher(this);
         refWatcher.watch(this);
     }
 

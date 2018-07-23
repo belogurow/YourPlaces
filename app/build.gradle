@@ -18,6 +18,11 @@ android {
     kapt {
         generateStubs = true
     }
+    kotlin {
+        experimental {
+            coroutines 'enable'
+        }
+    }
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
     defaultConfig {
@@ -41,6 +46,7 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
 
     implementation "com.google.firebase:firebase-core:$firebase_version"
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -58,11 +64,17 @@ dependencies {
 
     testImplementation "junit:junit:$junit_version"
 
+    // Architecture components
     implementation "android.arch.persistence.room:runtime:$arch_version"
     implementation "android.arch.lifecycle:runtime:$arch_version"
     implementation "android.arch.lifecycle:extensions:$arch_version"
     kapt "android.arch.persistence.room:compiler:$arch_version"
     kapt "android.arch.lifecycle:compiler:$arch_version"
+
+    // Dagger 2
+    implementation "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
     // Butter knife
     implementation "com.jakewharton:butterknife:$butter_knife_version"
@@ -71,6 +83,9 @@ dependencies {
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:$retrofit_coroutines_version"
+
 
     // Navigation Drawer
     implementation("com.mikepenz:materialdrawer:$navigation_drawer_version") {

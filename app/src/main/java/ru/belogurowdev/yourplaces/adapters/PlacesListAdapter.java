@@ -28,10 +28,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ru.belogurowdev.yourplaces.R;
 import ru.belogurowdev.yourplaces.activities.PlaceInfoActivity;
 import ru.belogurowdev.yourplaces.activities.PlacesListActivity;
-import ru.belogurowdev.yourplaces.Api.GooglePlacesList.Result;
-import ru.belogurowdev.yourplaces.R;
+import ru.belogurowdev.yourplaces.data.model.place.Result;
 
 /**
  * Created by alexbelogurow on 11.08.17.
